@@ -9,6 +9,8 @@
 import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 const SessionController = () => import('#controllers/session_controller')
+const EmployeesController = () => import('#controllers/employees_controller')
+
 router.on('/').render('welcome')
 router.on('/home').render('page/home')
 
@@ -22,3 +24,6 @@ router
   })
   .use(middleware.auth())
   .as('logout')
+
+// resources for the employee
+router.resource('employees', EmployeesController)
