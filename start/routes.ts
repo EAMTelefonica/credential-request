@@ -11,8 +11,9 @@ import router from '@adonisjs/core/services/router'
 const SessionController = () => import('#controllers/session_controller')
 const EmployeesController = () => import('#controllers/employees_controller')
 
-router.on('/').render('welcome')
-router.on('/home').render('page/home')
+router.on('/').render('pages/login/login.edge')
+router.on('/template').render('all_template')
+router.on('/home').render('pages/home').use(middleware.auth())
 
 //routes for login and logout
 router.on('/login').render('pages/login/login.edge').as('login')
@@ -26,4 +27,6 @@ router
   .as('logout')
 
 // resources for the employee
-router.resource('employees', EmployeesController)
+router
+  .resource('employees', EmployeesController)
+  .use(['index', 'create', 'store', 'update', 'show', 'edit', 'destroy'], middleware.auth())

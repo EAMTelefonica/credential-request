@@ -23,7 +23,7 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Info boxes -->
-            <div class="row">
+            {{-- <div class="row">
                 <!-- /.col -->
                 <div class="col-12 col-sm-8 col-md-">
 
@@ -33,7 +33,7 @@
                             <!-- DIRECT CHAT -->
 
                             <!-- /.card-body -->
-                            <div class="card-footer">
+                            {{-- <div class="card-footer">
                                 <form action="#" method="post">
                                     <div class="input-group">
                                         <input type="text" name="message" placeholder="Type Message ..."
@@ -43,7 +43,7 @@
                                         </span>
                                     </div>
                                 </form>
-                            </div>
+                            </div> --}}
                             <!-- /.card-footer-->
                         </div>
                         <!--/.direct-chat -->
@@ -59,7 +59,7 @@
                     <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-            </div>
+            </div> --}}
             <!-- /.row -->
 
 
@@ -96,7 +96,7 @@
 
             <!-- /.row -->
 
-            <div class="form-inline">
+            {{-- <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
                     <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                         aria-label="Search">
@@ -106,14 +106,15 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- TABLE: LATEST ORDERS -->
             <div class="card">
                 <div class="card-header border-transparent">
                     <div class="card-header border-transparent">
-                        <a href="javascript:void(0)" class="btn btn-sm bg-success float-left">Nuevo Empleado</a>
-                        <a href="javascript:void(0)" class="btn btn-sm btn-info float-right">Perfiles</a>
+                        <a href="{{route('employees.create')}}" class="btn btn-sm bg-success float-left">Nuevo
+                            Empleado</a>
+                        {{-- <a href="javascript:void(0)" class="btn btn-sm btn-info float-right">Perfiles</a> --}}
                     </div>
                     <h3 class="card-title">Empleados</h3>
 
@@ -132,76 +133,42 @@
                         <table class="table m-0">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Item</th>
+                                    <th>ID empleado</th>
+                                    <th>Nombre</th>
                                     <th>Status</th>
-                                    <th>Popularity</th>
+                                    <th class="actions text-middle">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @each(employee in employees)
                                 <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
+                                    <td><a href="{{route('employees.show', [employee.id])}}">{{employee.id}}</a></td>
+                                    <td>{{employee.firstname}} {{employee.lastname}}</td>
                                     <td><span class="badge badge-success">Shipped</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            90,80,90,-70,61,-83,63</div>
+                                    <td class="actions">
+                                        <a href="{{route('employees.show', [employee.id])}}"><button
+                                                class="btn btn-primary btn-sm" href="#">
+                                                <i class="fas fa-folder">
+                                                </i>
+                                                Detalles
+                                            </button>
+                                        </a>
+
+                                        <a href="{{route('employees.edit', [employee.id])}}"><button
+                                                class="btn btn-primary btn-sm" href="#">
+                                                <i class="fas fa-pen">
+                                                </i>
+                                                Editar
+                                            </button>
+                                        </a>
+
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                            data-target="#modal-delete-{{employee.id}}">
+                                            <i class="fas fa-trash-alt"></i> Eliminar
+                                        </button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                            90,80,-90,70,61,-83,68</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                    <td>iPhone 6 Plus</td>
-                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                            90,-80,90,70,-61,83,63</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="badge badge-info">Processing</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                            90,80,-90,70,-61,83,63</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                            90,80,-90,70,61,-83,68</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                    <td>iPhone 6 Plus</td>
-                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                            90,-80,90,70,-61,83,63</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            90,80,90,-70,61,-83,63</div>
-                                    </td>
-                                </tr>
+                                @end
                             </tbody>
                         </table>
                     </div>
@@ -224,6 +191,37 @@
 </div>
 <!-- /.row -->
 </div><!--/. container-fluid -->
+{{-- delete modals --}}
+@each(employee in employees)
+<div class="modal fade" id="modal-delete-{{employee.id}}" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+            <div class="modal-header">
+                <h4 class="modal-title">{{employee.identification_number}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>seguro que desea eliminar al empleado {{employee.firstname}} {{employee.lastname}}, todas las request
+                    relacionadas con el tambien seran eliminadas</p>
+            </div>
+            <form class="d-inline-block" method="POST"
+                action="{{route('employees.destroy', [employee.id])}}?_method=DELETE">
+                <!-- Delete form -->
+                {{ csrfField() }}
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-danger btn-default" type="submit"><i class="fas fa-trash">
+                        </i> Eliminar </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@end
 </section>
 <!-- /.content -->
 </div>

@@ -8,7 +8,7 @@ export default class Employee extends BaseModel {
   declare id: number
 
   @column()
-  declare fristname: string
+  declare firstname: string
 
   @column()
   declare lastname: string

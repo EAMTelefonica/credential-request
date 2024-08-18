@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label>{{text}}</label>
+    <select class="form-control" id="{{id || ''}}" name="{{id||''}}">
+        @each(item in options)
+        <option value='{{item.value}}' {{item.isselected||''}}>{{item.text}}</option>
+        @end
+    </select>
+</div>
