@@ -31,7 +31,11 @@ export default class EmployeesController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({ view, params }: HttpContext) {
+    const emp = await Employee.findOrFail(params.id)
+
+    return view.render('pages/employees/employee_detail', { emp })
+  }
 
   /**
    * Edit individual record
