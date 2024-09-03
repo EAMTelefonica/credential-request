@@ -8,8 +8,11 @@ export default class Request extends BaseModel {
   declare id: number
 
   @column()
+  declare employeeId: number
+
+  @column()
   @belongsTo(() => Employee)
-  declare user: BelongsTo<typeof Employee>
+  declare employee: BelongsTo<typeof Employee>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

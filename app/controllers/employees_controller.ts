@@ -33,8 +33,9 @@ export default class EmployeesController {
    */
   async show({ view, params }: HttpContext) {
     const emp = await Employee.findOrFail(params.id)
+    const requests = await emp.related('requests').query()
 
-    return view.render('pages/employees/employee_detail', { emp })
+    return view.render('pages/employees/employee_detail', { emp, requests })
   }
 
   /**

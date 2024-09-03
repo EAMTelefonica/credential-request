@@ -36,11 +36,14 @@
                             <div class="card-footer">
                                 <form action="#" method="post">
                                     <div class="input-group">
-                                        <input type="text" name="message" placeholder="Type Message ..."
-                                            class="form-control">
-                                        <span class="input-group-append">
-                                            <button type="button" class="btn btn-warning">Send</button>
-                                        </span>
+                                        <div class="input-group" data-widget="sidebar-search">
+                                            <input class="form-control form-control-sidebar" type="search"
+                                                placeholder="Search" aria-label="Search">
+                                            <span class="input-group-append">
+                                                <button type="button" class="btn btn-warning">
+                                                    <i class="fas fa-search fa-fw"></i></button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -96,7 +99,7 @@
 
             <!-- /.row -->
 
-            <div class="form-inline">
+            {{-- <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
                     <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                         aria-label="Search">
@@ -106,7 +109,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- TABLE: LATEST ORDERS -->
             <div class="card">

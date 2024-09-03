@@ -1,0 +1,308 @@
+@!component('layout/dashboard')
+@section('content')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Alta Usuario front-Office</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title ">Solicitud alta usuario Guser</h3>
+                        </div>
+                        <form action="{{route('procesar_alta')}}" method="POST" enctype="multipart/form-data">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Nombre',
+                                            id:'firstname' })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Apellido',
+                                            id:'lastname' })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/selectinput', { text: 'Tipo Identificacion',
+                                            id:'identification_type', options:[{text:'DNI',value:'DNI'},
+                                            {text:'NIE',value:'NIE'},
+                                            {text:'pasaporte',value:'PASSPORT'}] })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Numero',
+                                        id:'identification_number' })
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Email TechM',
+                                            id:'EmailTechM' })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/selectinput', { text: 'Role', id:'role', options:[
+                                            {text:'operador',value:'operador'},
+                                            {text:'cordinador',value:'cordinador'}]
+                                            })
+                                            {{ csrfField() }}
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-sm-3 mb-2">
+                                    <div class="form-group ">
+                                        <a
+                                            href="https://sts.tid.es/adfs/ls/?SAMLRequest=lZLNTsMwEIRfxdp74sQUUqymVQEhkIqoSODAbRO7ravEDl6n4vEJ%2FRFwqcTR8oxn9ltPZp9tw3bak3E2hzROgGlbO2XsOofX8j4aw2w6IWwb0cl5Hzb2RX%2F0mgIbjJbk4SaH3lvpkAxJi60mGWpZzJ8WUsSJ7LwLrnYNsDmR9mGIunWW%2Blb7QvudqfXryyKHTQgdSc47H1Wd8wGbKI1aVPHGxMbqwNf94ObfibwonoHdDTWMxbCvfnJToDgYFWviqFbEG%2BLA7p2v9b59DitsSAN7vMsBR5hVV9v0Qo3GmdpuUqGqLBUZXtWX1VgNIloikdnpHxtRrx8tBbQhB5EIESVZJK7LVMiLTI5GcSKu34EtjzPfGHtgeQ5QdRCRfCjLZbR8Lkpgb6edDAI4bkDu0%2F1v9OcfxhNvmP6HbqsDKgw44b9jp8fj338w%2FQI%3D&SigAlg=http%3A%2F%2Fwww.w3.org%2F2001%2F04%2Fxmldsig-more%23rsa-sha256&Signature=Du9JNIV6HIhq1zisfawMpeMi88PPMfK%2B3qmViviKTM1NOnCYjcJ0EFKL2cU%2FCCPdAS4KG4qZK6iXYcNoJWlVxPD4zDoPbnISbQPdTxVucW%2FI8f7sfPYJi8i8KMnSStImrEHACxi0zgw79XPYD23mYL5NIeor%2BMTOT5kOcUY02PeyewmqGYPwclP5HmkhzQiQcZHyh1p%2BPcqqZXBRpQD%2F%2FWpiYmO%2BmpYfvX3YpwECUD5zEtUtuJ2ofmAB1UMpkCotbNOkLHQET0GVki905FgplSVZWCGP8Beyb0JpK%2FXtuQTRBr8gKBZi7h4Bm3PVZybwyhhMVG9KwFjWR0ga0pOX2g%3D%3D">
+                                            ACCESO AL PORTAR DE Guser</a>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!--<div class="card card-default">-->
+                                        <div class="card-header bg-primary">
+                                            <!--<h3 class="card-title">Dropzone.js <small><em>jQuery File Upload</em> like
+                                                look</small></h3>-->
+                                            <h1 class="card-title">Solicitud Tarjeta TELEFONICA</h1>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="m-1 mt-4">Adjuntar documentacion requerida:</h4>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <p class="mb-2">
+                                                <label for="formulario">
+                                                    <span class="lead" data-dz-name="">
+                                                        <strong>1.-
+                                                            Formulario de
+                                                            tarjeta al correo.
+                                                        </strong>
+                                                    </span>
+                                                    {{-- añadido por mi --}}
+                                                    <div class="input-group form-control">
+                                                        <input type="file" id="formulario" name="formulario"
+                                                            accept="*" />
+                                                    </div>
+                                                </label>
+                                            </p>
+
+                                            {{-- <input type="file" id="formulario" name="formulario" accept="*" /> --}}
+
+
+
+                                            <p class="mb-2">
+                                                <label for="fotocarnet">
+                                                    <span class="lead" data-dz-name="">
+                                                        <strong>
+                                                            2.- Foto tipo carnet.
+                                                        </strong>
+                                                    </span>
+                                                    {{-- añadido por mi --}}
+                                                    <div class="input-group form-control">
+                                                        <input type="file" id="fotocarnet" name="fotocarnet"
+                                                            accept="*" />
+                                                    </div>
+
+                                                </label>
+                                            </p>
+                                            {{-- <input type="file" id="fotocarnet" name="fotocarnet" accept="*" /> --}}
+
+
+
+                                            <p class="mb-2">
+                                                <label for="fotodocu">
+                                                    <span class="lead" data-dz-name=""><strong>
+                                                            3.- Foto de DNI o NIE ambos lados.</strong>
+                                                    </span>
+                                                    {{-- añadido por mi --}}
+                                                    <div class="input-group form-control ">
+                                                        <input type="file" id="fotodocu" name="fotodocu" accept="*" />
+                                                    </div>
+                                                </label>
+
+                                            </p>
+                                        </div>
+
+                                        {{-- <input type="file" id="fotodocu" name="fotodocu" accept="*" /> --}}
+                                        <button type="reset" class="btn btn-warning col cancel col-md-2 float-sm-right">
+                                            <i class="fas fa-times-circle"></i>
+                                            <span>Cancelar</span>
+                                        </button>
+
+                                        {{-- <div id="actions" class="row">
+                                            <div class="col-lg-6 ">
+                                                <div class="btn-group w-100 ">
+                                                    <span class="btn btn-success col fileinput-button dz-clickable">
+                                                        <i class="fas fa-plus"></i>
+                                                        <span>Add files</span>
+                                                    </span>
+                                                    <button type="submit" class="btn btn-info col start">
+                                                        <i class="fas fa-upload"></i>
+                                                        <span>Start upload</span>
+                                                    </button>
+                                                    <button type="reset" class="btn btn-warning col cancel">
+                                                        <i class="fas fa-times-circle"></i>
+                                                        <span>Cancel upload</span>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 d-flex ">
+                                                <div class="fileupload-process w-100">
+                                                    <div id="total-progress" class="progress progress-striped active"
+                                                        role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                                        aria-valuenow="0">
+                                                        <div class="progress-bar progress-bar-success" style="width:0%;"
+                                                            data-dz-uploadprogress=""></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table table-striped files" id="previews">
+
+
+                                            <div id="" class="row mt-2">
+                                                <div class="col-auto"><span class="preview"><img src="data:," alt=""
+                                                            data-dz-thumbnail=""></span></div>
+                                                <div class="col d-flex align-items-center">
+                                                    <p class="mb-0"><span class="lead"
+                                                            data-dz-name="">AdonisJSAdminlte3-main
+                                                            (1).zip</span>(<span data-dz-size=""><strong>21.3</strong>
+                                                            MB</span>)</p><strong class="error text-danger"
+                                                        data-dz-errormessage=""></strong>
+                                                </div>
+                                                <div class="col-4 d-flex align-items-center">
+                                                    <div class="progress progress-striped active w-100"
+                                                        role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                                        aria-valuenow="0">
+                                                        <div class="progress-bar progress-bar-success" style="width:0%;"
+                                                            data-dz-uploadprogress=""></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto d-flex align-items-center">
+                                                    <div class="btn-group"><button class="btn btn-primary start"><i
+                                                                class="fas fa-upload"></i><span>Start</span></button><button
+                                                            data-dz-remove="" class="btn btn-warning cancel"><i
+                                                                class="fas fa-times-circle"></i><span>Cancel</span></button><button
+                                                            data-dz-remove="" class="btn btn-danger delete"><i
+                                                                class="fas fa-trash"></i><span>Delete</span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="" class="row mt-2">
+                                                <div class="col-auto"><span class="preview"><img src="data:," alt=""
+                                                            data-dz-thumbnail=""></span></div>
+                                                <div class="col d-flex align-items-center">
+                                                    <p class="mb-0"><span class="lead"
+                                                            data-dz-name="">AdonisJSAdminlte3-main
+                                                            (1).zip</span>(<span data-dz-size=""><strong>21.3</strong>
+                                                            MB</span>)</p><strong class="error text-danger"
+                                                        data-dz-errormessage=""></strong>
+                                                </div>
+                                                <div class="col-4 d-flex align-items-center">
+                                                    <div class="progress progress-striped active w-100"
+                                                        role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                                        aria-valuenow="0">
+                                                        <div class="progress-bar progress-bar-success" style="width:0%;"
+                                                            data-dz-uploadprogress=""></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto d-flex align-items-center">
+                                                    <div class="btn-group"><button class="btn btn-primary start"><i
+                                                                class="fas fa-upload"></i><span>Start</span></button><button
+                                                            data-dz-remove="" class="btn btn-warning cancel"><i
+                                                                class="fas fa-times-circle"></i><span>Cancel</span></button><button
+                                                            data-dz-remove="" class="btn btn-danger delete"><i
+                                                                class="fas fa-trash"></i><span>Delete</span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="" class="row mt-2">
+                                                <div class="col-auto"><span class="preview"><img src="data:," alt=""
+                                                            data-dz-thumbnail=""></span></div>
+                                                <div class="col d-flex align-items-center">
+                                                    <p class="mb-0"><span class="lead"
+                                                            data-dz-name="">AdonisJSAdminlte3-main
+                                                            (1).zip</span>(<span data-dz-size=""><strong>21.3</strong>
+                                                            MB</span>)</p><strong class="error text-danger"
+                                                        data-dz-errormessage=""></strong>
+                                                </div>
+                                                <div class="col-4 d-flex align-items-center">
+                                                    <div class="progress progress-striped active w-100"
+                                                        role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                                        aria-valuenow="0">
+                                                        <div class="progress-bar progress-bar-success" style="width:0%;"
+                                                            data-dz-uploadprogress=""></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto d-flex align-items-center">
+                                                    <div class="btn-group"><button class="btn btn-primary start"><i
+                                                                class="fas fa-upload"></i><span>Start</span></button><button
+                                                            data-dz-remove="" class="btn btn-warning cancel"><i
+                                                                class="fas fa-times-circle"></i><span>Cancel</span></button><button
+                                                            data-dz-remove="" class="btn btn-danger delete"><i
+                                                                class="fas fa-trash"></i><span>Delete</span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div> --}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Enviar Correos</button>
+                                <!--<div class="float-sm-right">
+                                    <button type="submit" class="btn btn-primary">Alta en Herramientas</button>
+                                    <p class="mt-1" style=text-danger>Se debe tener usuario HI\IDX Y EDomus para
+                                        realizar el alta
+                                        en las
+                                        Herramientas</p>
+                                </div>-->
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</div>
+</section>
+</div>
+@endsection

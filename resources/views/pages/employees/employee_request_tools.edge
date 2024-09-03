@@ -1,0 +1,391 @@
+@!component('layout/dashboard')
+@section('content')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Alta Herramientas</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="">Home</a></li>
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title ">Solicitud alta diferentes Herramientas</h3>
+                        </div>
+                        <form action="{{route('employees.store')}}" method="POST">
+                            <div class="card-body">
+                                <div class="col-sm-3">
+                                    <div class="form-group ">
+                                        <h3>
+                                            Datos del Empleado:</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Nombre',
+                                            id:'firstname' })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Apellido',
+                                            id:'lastname' })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Nº Identificacion',
+                                            id:'dni_nie' })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Matricula',
+                                        id:'matricula_hi' })
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Email front-office',
+                                            id:'email' })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group ">
+                                        <h4>
+                                            Datos para completar solicitud de acceso a azure BR:</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/selectinput', { text: 'Sexo', id:'role',
+                                            options:[
+                                            {text:'Masculino',value:'soltero'},
+                                            {text:'Femenino',value:'casado'}]
+                                            })
+                                            {{ csrfField() }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/selectinput', { text: 'Estado civil', id:'role',
+                                            options:[
+                                            {text:'Soltero',value:'soltero'},
+                                            {text:'Casado',value:'casado'}]
+                                            })
+                                            {{ csrfField() }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Nº Identificacion',
+                                            id:'dni_nie' })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Fecha de Nacimiento',
+                                        id:'Fecha de Nacimiento' })
+                                    </div>
+                                </div>
+
+                                {{-- Acceso Herramientas via Email: --}}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-primary collapsed-card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Acceso Herramientas via Email:</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool"
+                                                        data-card-widget="collapse"><i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="card-body" style="display: none;">
+                                                <ul>
+                                                    <li class="nav-item">
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>1.-
+                                                                    Solicitud autorizacion ITSM
+                                                                </strong>
+                                                            </span></p>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                    2.- Acceso buzón de front_office.</strong>
+                                                            </span></p>
+                                                    </li>
+                                                    <li class="nav-item">
+
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                    3.- Alta Power BI</strong>
+                                                            </span></p>
+                                                    </li>
+                                                    <li class="nav-item">
+
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                    4.- Alta Acceso a Confluence</strong>
+                                                            </span></p>
+                                                    </li>
+
+                                                    <li class="nav-item">
+
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                    5.- Acceso a IGRI
+
+                                                                </strong>
+                                                            </span></p>
+                                                    </li>
+                                                    <li class="nav-item">
+
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                    6.- Acceso a UDO
+
+                                                                </strong>
+                                                            </span></p>
+                                                    </li>
+                                                    <li class="nav-item">
+
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                    7.- Acceso portal Azure VIVO
+                                                                </strong>
+                                                            </span></p>
+                                                    </li>
+                                                    <li class="nav-item">
+
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                    8.- Acceso portal Azure VIVO (HAC)
+                                                                </strong>
+                                                            </span></p>
+                                                    </li>
+                                                    <li class="nav-item">
+
+                                                        <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                    9.- Acceso chats de teams
+                                                                </strong>
+                                                            </span></p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {{-- Acceso Herramientas con apertura de UDo Orderrr --}}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-primary collapsed-card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Acceso Herramientas con apertura de UDo Orderrr
+                                                </h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool"
+                                                        data-card-widget="collapse"><i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+
+                                                <p class="mb-2"><span class="lead" data-dz-name=""><strong>1.-
+                                                            Alta usuario ITSM
+                                                        </strong>
+                                                    </span>
+                                                </p>
+
+
+
+                                                <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                            2.- Acceso herramientas video:
+                                                        </strong>
+                                                    </span></p>
+
+                                                <div class="col-md-3">
+                                                    <div class="card card-primary collapsed-card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Herramientas globales:
+                                                            </h3>
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-tool"
+                                                                    data-card-widget="collapse"><i
+                                                                        class="fas fa-plus"></i>
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="card-body">
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        Atlas
+                                                                    </strong>
+                                                                </span></p>
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        Zabbix
+                                                                    </strong>
+                                                                </span></p>
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        Calicux
+                                                                    </strong>
+                                                                </span></p>
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        youbora
+                                                                    </strong>
+                                                                </span></p>
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        PagerDuty
+                                                                    </strong>
+                                                                </span></p>
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="card card-primary collapsed-card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">plataforma de vídeo:</h3>
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-tool"
+                                                                    data-card-widget="collapse"><i
+                                                                        class="fas fa-plus"></i>
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="card-body">
+
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        Dominio OttProd
+                                                                    </strong>
+                                                                </span></p>
+
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        Dominio ExternalProd
+                                                                    </strong>
+                                                                </span></p>
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        Dominio OPG
+                                                                    </strong>
+                                                                </span></p>
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        VideoPlatform
+                                                                    </strong>
+                                                                </span></p>
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        Portal de Azure GVP
+                                                                    </strong>
+                                                                </span></p>
+
+                                                            <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                                        Portal de Azure GVP
+                                                                    </strong>
+                                                                </span></p>
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                            3.- MIB.
+                                                        </strong>
+                                                    </span></p>
+
+                                                <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                            4.- Sharepoint GVP
+                                                        </strong>
+                                                    </span>
+                                                </p>
+
+                                                <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                            5.- Acceso a los Technnical Description de la CDN
+                                                        </strong>
+                                                    </span>
+                                                </p>
+
+
+                                                <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                            6.- Acceso portal Azure T. ES
+                                                            (4P, aura, MovistarHome, HAC)
+                                                        </strong>
+                                                    </span></p>
+                                                <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                            7.- Operativas HAC ES
+
+                                                        </strong>
+                                                    </span></p>
+
+
+
+                                                <p class="mb-2"><span class="lead" data-dz-name=""><strong>
+                                                            8.- Bastion ES
+                                                        </strong>
+                                                    </span></p>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Enviar Correos</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@endsection

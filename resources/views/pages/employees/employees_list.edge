@@ -22,8 +22,8 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <!-- Info boxes -->
-            {{-- <div class="row">
+
+            <div class="row">
                 <!-- /.col -->
                 <div class="col-12 col-sm-8 col-md-">
 
@@ -33,17 +33,20 @@
                             <!-- DIRECT CHAT -->
 
                             <!-- /.card-body -->
-                            {{-- <div class="card-footer">
+                            <div class="card-footer">
                                 <form action="#" method="post">
                                     <div class="input-group">
-                                        <input type="text" name="message" placeholder="Type Message ..."
-                                            class="form-control">
-                                        <span class="input-group-append">
-                                            <button type="button" class="btn btn-warning">Send</button>
-                                        </span>
+                                        <div class="input-group" data-widget="sidebar-search">
+                                            <input class="form-control form-control-sidebar" type="search"
+                                                placeholder="Search" aria-label="Search">
+                                            <span class="input-group-append">
+                                                <button type="button" class="btn btn-warning">
+                                                    <i class="fas fa-search fa-fw"></i></button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </form>
-                            </div> --}}
+                            </div>
                             <!-- /.card-footer-->
                         </div>
                         <!--/.direct-chat -->
@@ -59,54 +62,13 @@
                     <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-            </div> --}}
-            <!-- /.row -->
-
-
-            <!-- /.row -->
-
-            <!-- Main row -->
-            <div class="row">
-                <!-- Left col -->
-                <div class="col-md-12">
-
-                    <!-- /.card -->
-                    <!-- <div class="row">
-                        <div class="col-md-8">-->
-                    <!-- DIRECT CHAT -->
-
-                    <!-- /.card-body -->
-                    <!-- <div class="card-footer">
-                                <form action="#" method="post">
-                                    <div class="input-group">
-                                        <input type="text" name="message" placeholder="Type Message ..."
-                                            class="form-control">
-                                        <span class="input-group-append">
-                                            <button type="button" class="btn btn-warning">Send</button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>-->
-                    <!-- /.card-footer-->
-                </div>
-                <!--/.direct-chat -->
             </div>
             <!-- /.col -->
 
 
             <!-- /.row -->
 
-            {{-- <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
-                        </button>
-                    </div>
-                </div>
-            </div> --}}
+
 
             <!-- TABLE: LATEST ORDERS -->
             <div class="card">
@@ -144,23 +106,25 @@
                                 <tr>
                                     <td><a href="{{route('employees.show', [employee.id])}}">{{employee.id}}</a></td>
                                     <td>{{employee.firstname}} {{employee.lastname}}</td>
-                                    <td><span class="badge badge-success">Shipped</span></td>
+                                    <td><span class="badge badge-success">Completado</span><span
+                                            class="badge badge-warning">Pendiente</span></td>
+
                                     <td class="actions">
                                         <a href="{{route('employees.show', [employee.id])}}"><button
                                                 class="btn btn-primary btn-sm" href="#">
                                                 <i class="fas fa-folder">
                                                 </i>
-                                                Detalles
+                                                Perfil
                                             </button>
                                         </a>
 
-                                        <a href="{{route('employees.edit', [employee.id])}}"><button
+                                        {{-- <a href="{{route('employees.edit', [employee.id])}}"><button
                                                 class="btn btn-primary btn-sm" href="#">
                                                 <i class="fas fa-pen">
                                                 </i>
                                                 Editar
                                             </button>
-                                        </a>
+                                        </a> --}}
 
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                             data-target="#modal-delete-{{employee.id}}">

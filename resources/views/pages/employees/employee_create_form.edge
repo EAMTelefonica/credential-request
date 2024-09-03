@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Home</h1>
+                    <h1 class="m-0"></h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -30,45 +30,207 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Nuevo Usuario</h3>
+                            <h3 class="card-title">Nuevo Empleado</h3>
                         </div>
 
 
                         <form action="{{route('employees.store')}}" method="POST">
                             <div class="card-body">
+                                <div class="row">
 
-                                @!component('components/formtextinput', { text: 'Nombre',
-                                id:'firstname' })
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Nombre',
+                                        id:'firstname' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Apellido', id:'lastname' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'tipo Identificacion',
+                                        id:'identification_type', options:[{text:'DNI',value:'DNI'},
+                                        {text:'NIE',value:'NIE'},
+                                        {text:'pasaporte',value:'PASSPORT'}] })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'numero identificacion',
+                                        id:'identification_number' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Role', id:'role', options:[
+                                        {text:'operador',value:'operador'},
+                                        {text:'cordinador',value:'cordinador'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Matrícula HI',
+                                        id:'matricula_hi' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Correo Telefónica FO',
+                                        id:'email' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Nº tarjeta',
+                                        id:'tarjeta_id' })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!--<div class="card card-default">-->
+                                        <div class="card-header bg-primary">
+                                            <!--<h3 class="card-title">Dropzone.js <small><em>jQuery File Upload</em> like
+                                                                                look</small></h3>-->
+                                            <h1 class="card-title">Herramientas:</h1>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'UDo',
+                                        id:'udo' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'IGRI',
+                                        id:'igri' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Buzon FrontOffice',
+                                        id:'buzon_front_Office', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Buzón OpenGateway',
+                                        id:'buzon_front_Office', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Confluence',
+                                        id:'confluence' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Atlas',
+                                        id:'atlas' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Zeus',
+                                        id:'zeus' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Zabbix',
+                                        id:'zabbix' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Calicux',
+                                        id:'calicux' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Youbora',
+                                        id:'youbora', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'PagerDuty',
+                                        id:'pagerduty' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Dominio ExternalProd',
+                                        id:'dominio_externalprod' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Dominio OttProd',
+                                        id:'dominio_ottprod' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Dominio OPG',
+                                        id:'dominio_opg' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Dominio VideoPlatform',
+                                        id:'dominio_videoplatform' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'MIB',
+                                        id:'mib' })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Azure 4P ES',
+                                        id:'azure_4p_es', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Azure HAC BR',
+                                        id:'azure_hac_br', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Azure 4P BR',
+                                        id:'azure_4p_br', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Bastión HAAC',
+                                        id:'bastión_haac', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'SharePoint GVP Azure',
+                                        id:'sharepoint_gvp_azure', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
 
 
-                                @!component('components/formtextinput', { text: 'Apellido', id:'lastname' })
-                                @!component('components/selectinput', { text: 'tipo Identificacion',
-                                id:'identification_type', options:[{text:'DNI',value:'DNI'},
-                                {text:'NIE',value:'NIE'},
-                                {text:'pasaporte',value:'PASSPORT'}] })
+                                </div>
 
-                                @!component('components/formtextinput', { text: 'numero identificacion',
-                                id:'identification_number' })
-                                @!component('components/selectinput', { text: 'Role', id:'role', options:[
-                                {text:'operador',value:'operador'},
-                                {text:'cordinador',value:'cordinador'}]
-                                })
-                                {{ csrfField() }}
                             </div>
-
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                         </form>
                     </div>
 
+
+
                 </div>
 
             </div>
 
-
-
         </div>
+
+
+
+</div>
 </div>
 
 </div>

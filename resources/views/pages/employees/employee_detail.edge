@@ -44,44 +44,47 @@
                         </div>
                     </div>
                     <div class="card-footer">
+
                         <div class="text-right">
                             {{-- <a href="#" class="btn btn-sm bg-teal">
                                 <i class="fas fa-comments"></i>
                             </a> --}}
-                            <form class="d-inline-block" method="POST"
+                            {{-- <form class="d-inline-block" method="POST"
                                 action="{{route('employees.request.store', [emp.id])}}">
                                 <input type="hidden" name="requesttype" value="frontoffice">
                                 {{ csrfField() }}
                                 <button class="btn btn-sm btn-primary" type="submit"><i class="fas fa-plus">
                                     </i> Alta Usuario front Office </button>
-                            </form>
+                            </form> --}}
 
-                            <form class="d-inline-block" method="POST"
-                                action="{{route('employees.request.store', [emp.id])}}">
+                            <a href="{{route('employee.request.tools')}}" class="btn btn-sm btn-primary"><i
+                                    class="fas fa-plus">
+                                </i>Alta Herramientas con usuarios HI/IDX/Edomus</a>
+                            {{-- <form class="d-inline-block" action="{{route('employee_request_tools')}}">
                                 <input type="hidden" name="requesttype" value="hiidxedomus">
                                 {{ csrfField() }}
                                 <button class="btn btn-sm btn-primary" type="submit"><i class="fas fa-plus">
-                                    </i> Alta Herramientas con usuarios HI/IDX/Edomus </button>
-                            </form>
+                                    </i> Alta Herramientas con usuarios HI/IDX/Edomus</button>
+                            </form> --}}
 
                         </div>
+
                     </div>
                 </div>
             </div>
 
         </div>
 
-
-
-
-
-
         {{-- employee requests --}}
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Requests</h3>
+                        <h3 class="card-title">Herramientas:</h3>
+                        <div class="card-header text-muted border-bottom-0">
+                            {{emp.}}
+                        </div>
+
                         {{-- Searching tools --}}
                         {{-- <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -99,6 +102,7 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
                             <thead>
+
                                 <tr>
                                     <th>Request ID</th>
                                     <th>Herramienta</th>
@@ -109,25 +113,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @each(item in requests)
                                 <tr>
                                     <td>183</td>
                                     <td>Front office</td>
                                     <td>11-7-2014</td>
-                                    <td><span class="badge badge-success">Approved</span>
-                                        <span class="badge badge-warning">Pending</span>
-                                        <span class="badge badge-danger">Denied</span>
+                                    <td><span class="badge badge-success">Aprobado</span>
+                                        <span class="badge badge-warning">Solicitado</span>
+                                        {{-- <span class="badge badge-danger">denegado</span> --}}
                                     </td>
                                     <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                     <td class="actions">
-                                        {{-- <a href="{{route('req.show', [req.id])}}"> --}}
-                                            <button class="btn btn-primary btn-sm" href="#">
-                                                <i class="fas fa-folder">
-                                                </i>
-                                                Detalles
-                                            </button>
-                                            {{-- </a> --}}
 
-                                        {{-- <a href="{{route('request', req.id])}}"> --}}
+
+                                        {{-- <a href="{{route('request', [req.id])}}"> --}}
                                             <button class="btn btn-primary btn-sm" href="#">
                                                 <i class="fas fa-pen">
                                                 </i>
@@ -135,12 +134,10 @@
                                             </button>
                                             {{-- </a> --}}
 
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" {{--
-                                            data-target="#modal-delete-{{req.id}}" --}}>
-                                            <i class="fas fa-trash-alt"></i> Eliminar
-                                        </button>
                                     </td>
                                 </tr>
+                                @end
+
 
                             </tbody>
                         </table>
