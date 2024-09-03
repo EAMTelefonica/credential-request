@@ -1,3 +1,4 @@
+import Employee from '#models/employee'
 import EmailService from '#services/email_service'
 import { inject } from '@adonisjs/core'
 import { cuid } from '@adonisjs/core/helpers'
@@ -12,26 +13,49 @@ export default class AltasController {
     return view.render('pages/employees/employee_request.edge')
   }
   async procesarAlta({ request, response }: HttpContext) {
+    const disk = drive.use()
+    const stringuid = `/temp/${cuid()}`
+    const tempPath = `storage/${stringuid}`
     const values = request.all()
+    const employee = await Employee.firstOrCreate({
+      firstname: values.firstname,
+      lastname: values.lastname,
+      identification_type: values.identification_type,
+      identification_number: values.identification_number,
+      role: values.role,
+    })
     const formulario = request.file('formulario', {
       size: '2mb',
     })
-    const fotocarnet = request.file('fotocarnet')
-    const fotodocu = request.file('fotodocu')
-    const ubicacion = String(formulario?.tmpPath)
-
-    await formulario?.move(app.makePath('storage/uploads'), {
-      name: `${cuid()}.${formulario.extname}`,
+    const cuidformulario = `${formulario?.clientName}`
+    await formulario?.move(app.makePath(tempPath), {
+      name: cuidformulario,
     })
-    // await this.emailService.sendEmailFromAlta(ubicacion, '', '')
-    // console.log(values)
-    console.log(formulario)
+
+    const fotocarnet = request.file('fotocarnet', {
+      size: '2mb',
+    })
+    const cuidfotocarnet = `${fotocarnet?.clientName}`
+
+    await fotocarnet?.move(app.makePath(tempPath), { name: cuidfotocarnet })
+
+    const fotodocu = request.file('fotodocu', {
+      size: '2mb',
+    })
+
+    const cuidfotodocu = `${fotodocu?.clientName}`
+    await fotodocu?.move(app.makePath(tempPath), { name: cuidfotodocu })
+
+    await this.emailService.sendEmailFromAlta(
+      `${tempPath}/${cuidformulario}`,
+      `${tempPath}/${cuidfotocarnet}`,
+      `${tempPath}/${cuidfotodocu}`,
+      employee
+    )
+    await disk.deleteAll(stringuid)
+    await this.emailService.sendEmailForGuser(employee, values.EmailTechM)
+    console.log(values)
+    return response.redirect().back()
   }
-  async vaciar({}: HttpContext) {
-    console.log('intentando borrar')
-    const disk = drive.use()
-    console.log(disk)
-    await disk.delete('/uploads/vqy668pjw6j7ofaefiaom7k9.txt')
-    console.log('borrado?')
-  }
+  async vaciar({}: HttpContext) {}
 }

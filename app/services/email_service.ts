@@ -15,18 +15,37 @@ export default class EmailService {
       // .htmlView('template', info)
     })
   }
-  async sendEmailFromAlta(formulario:string, fotocarnet:string, fotodocu:string){
-    
+  async sendEmailFromAlta(
+    formulario: string,
+    fotocarnet: string,
+    fotodocu: string,
+    employee: Employee
+  ) {
     console.log(app.makePath(formulario))
-    // await mail.send((message) => {
-    //   message
-    //   .attach(app.makePath(formulario))
-    //     .to('evely.adrianzamorales.ext@telefonica.com')
-    //     .cc('evely.adrianzamorales.ext@telefonica.com')
-    //     .bcc('evely.adrianzamorales.ext@telefonica.com')
-    //     .from('evely.adrianzamorales.ext@telefonica.com')
-    //     .subject('test prueba')
-    //     .text('prueba para frontoffice con archivos' )
-    // })
+    console.log(app.makePath(fotocarnet))
+    console.log(app.makePath(fotodocu))
+    await mail.send((message) => {
+      message
+        .attach(app.makePath(formulario))
+        .attach(app.makePath(fotocarnet))
+        .attach(app.makePath(fotodocu))
+        .to('evely.adrianzamorales.ext@telefonica.com')
+        .cc('evely.adrianzamorales.ext@telefonica.com')
+        .bcc('evely.adrianzamorales.ext@telefonica.com')
+        .from('evely.adrianzamorales.ext@telefonica.com')
+        .subject(`Solicitud de acceso para ${employee.firstname} ${employee.lastname}`)
+        .htmlView('emailtemplate/alta_tarjeta.edge', { employee })
+    })
+  }
+  async sendEmailForGuser(employee: Employee, emailtech: string) {
+    await mail.send((message) => {
+      message
+        .to('evely.adrianzamorales.ext@telefonica.com')
+        .cc('evely.adrianzamorales.ext@telefonica.com')
+        .bcc('evely.adrianzamorales.ext@telefonica.com')
+        .from('evely.adrianzamorales.ext@telefonica.com')
+        .subject(`Alta usuario nuevo en guser ${employee.firstname} ${employee.lastname}`)
+        .htmlView('emailtemplate/alta_guser.edge', { employee, emailtech })
+    })
   }
 }
