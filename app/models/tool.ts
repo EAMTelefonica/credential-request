@@ -9,13 +9,13 @@ export default class Tool extends BaseModel {
   declare tool_name: string
 
   @column()
-  declare RequiredView: string
+  declare required_view: string
 
   @column()
-  declare UpdatedView: string
+  declare updated_view: string
 
   @column()
-  declare EmailTemplate: string
+  declare email_template: string
 
   @column()
   declare email_to: string

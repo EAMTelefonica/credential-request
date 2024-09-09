@@ -1,4 +1,5 @@
 import Employee from '#models/employee'
+import Tool from '#models/tool'
 import EmailService from '#services/email_service'
 import { inject } from '@adonisjs/core'
 import { cuid } from '@adonisjs/core/helpers'
@@ -55,6 +56,18 @@ export default class AltasController {
     await disk.deleteAll(stringuid)
     await this.emailService.sendEmailForGuser(employee, values.EmailTechM)
     console.log(values)
+
+    const toolTarjeta = await Tool.findByOrFail('tool_name', 'Tarjeta telefonica')
+    const toolGuser = await Tool.findByOrFail('tool_name', 'G-user')
+
+    await employee
+      .related('requests')
+      .firstOrCreate({ toolId: toolTarjeta.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
+
+    await employee
+      .related('requests')
+      .firstOrCreate({ toolId: toolGuser.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
+
     return response.redirect().back()
   }
   async vaciar({}: HttpContext) {}

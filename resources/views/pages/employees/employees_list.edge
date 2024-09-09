@@ -80,14 +80,14 @@
                     </div>
                     <h3 class="card-title">Empleados</h3>
 
-                    <div class="card-tools">
+                    {{-- <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
                         </button>
                         <button type="button" class="btn btn-tool" data-card-widget="remove">
                             <i class="fas fa-times"></i>
                         </button>
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
@@ -104,8 +104,9 @@
                             <tbody>
                                 @each(employee in employees)
                                 <tr>
-                                    <td><a href="{{route('employees.show', [employee.id])}}">{{employee.id}}</a></td>
-                                    <td>{{employee.firstname}} {{employee.lastname}}</td>
+                                    <td>{{employee.id}}</td>
+                                    <td><a href="{{route('employees.show', [employee.id])}}">{{employee.firstname}}
+                                            {{employee.lastname}}</a></td>
                                     <td><span class="badge badge-success">Completado</span><span
                                             class="badge badge-warning">Pendiente</span></td>
 

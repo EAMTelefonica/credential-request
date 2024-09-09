@@ -32,7 +32,7 @@
                         <div class="card-header">
                             <h3 class="card-title ">Solicitud alta diferentes Herramientas</h3>
                         </div>
-                        <form action="{{route('employees.store')}}" method="POST">
+                        <form action="{{route('employees.request_tools.store', [employee.id])}}" method="POST">
                             <div class="card-body">
                                 <div class="col-sm-3">
                                     <div class="form-group ">
@@ -44,20 +44,20 @@
                                     <div class="col-sm-2">
                                         <div class="form-group">
                                             @!component('components/formtextinput', { text: 'Nombre',
-                                            id:'firstname' })
+                                            id:'firstname', value: employee.firstname })
                                         </div>
                                     </div>
 
                                     <div class="col-sm-2">
                                         <div class="form-group">
                                             @!component('components/formtextinput', { text: 'Apellido',
-                                            id:'lastname' })
+                                            id:'lastname' , value: employee.lastname})
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             @!component('components/formtextinput', { text: 'Nº Identificacion',
-                                            id:'dni_nie' })
+                                            id:'dni_nie', value: employee.identification_number })
                                         </div>
                                     </div>
 
@@ -102,12 +102,7 @@
                                             {{ csrfField() }}
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            @!component('components/formtextinput', { text: 'Nº Identificacion',
-                                            id:'dni_nie' })
-                                        </div>
-                                    </div>
+
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Fecha de Nacimiento',
                                         id:'Fecha de Nacimiento' })

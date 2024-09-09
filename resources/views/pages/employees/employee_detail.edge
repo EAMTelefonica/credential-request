@@ -57,8 +57,8 @@
                                     </i> Alta Usuario front Office </button>
                             </form> --}}
 
-                            <a href="{{route('employee.request.tools')}}" class="btn btn-sm btn-primary"><i
-                                    class="fas fa-plus">
+                            <a href="{{route('employees.request_tools.index', [emp.id])}}"
+                                class="btn btn-sm btn-primary"><i class="fas fa-plus">
                                 </i>Alta Herramientas con usuarios HI/IDX/Edomus</a>
                             {{-- <form class="d-inline-block" action="{{route('employee_request_tools')}}">
                                 <input type="hidden" name="requesttype" value="hiidxedomus">
@@ -113,14 +113,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @each(item in requests)
                                 <tr>
                                     <td>183</td>
-                                    <td>Front office</td>
+                                    <td>{{item.$preloaded.tool.tool_name}}</td>
                                     <td>11-7-2014</td>
-                                    <td><span class="badge badge-success">Aprobado</span>
-                                        <span class="badge badge-warning">Solicitado</span>
+                                    <td>
+                                        @if(item.request_status==='SI')
+                                        <span class="badge badge-success">Aprobado</span>
+                                        @end
                                         {{-- <span class="badge badge-danger">denegado</span> --}}
+                                        @if(item.request_status==='SOLICITADA')
+                                        <span class="badge badge-warning">Solicitado</span>
+                                        @end
+                                        @if(item.request_status==='NO')
+                                        <span class="badge badge-danger">Rechazado</span>
+                                        @end
+
+
                                     </td>
                                     <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                     <td class="actions">

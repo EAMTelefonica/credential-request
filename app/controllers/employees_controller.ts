@@ -33,7 +33,7 @@ export default class EmployeesController {
    */
   async show({ view, params }: HttpContext) {
     const emp = await Employee.findOrFail(params.id)
-    const requests = await emp.related('requests').query()
+    const requests = await emp.related('requests').query().preload('employee').preload('tool')
 
     return view.render('pages/employees/employee_detail', { emp, requests })
   }

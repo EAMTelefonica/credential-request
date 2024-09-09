@@ -7,9 +7,9 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.text('tool_name')
-      table.text('RequiredView')
-      table.text('UpdatedView')
-      table.text('EmailTemplate')
+      table.text('required_view')
+      table.text('updated_view')
+      table.text('email_template')
       table.text('email_to')
       table.text('email_cc')
       table.text('email_bc')

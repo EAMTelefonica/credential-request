@@ -1,7 +1,7 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'requests'
+  protected tableName = 'tool_requests'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
@@ -26,5 +26,7 @@ export default class extends BaseSchema {
 
   async down() {
     this.schema.dropTable(this.tableName)
+    this.schema.raw('DROP TYPE IF EXISTS "request_type_enum"')
+    this.schema.raw('DROP TYPE IF EXISTS "request_status_enum"')
   }
 }

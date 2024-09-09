@@ -1,7 +1,7 @@
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
-import Request from './request.js'
+import ToolRequest from './tool_request.js'
 
 export default class Employee extends BaseModel {
   @column({ isPrimary: true })
@@ -22,8 +22,8 @@ export default class Employee extends BaseModel {
   @column()
   declare identification_number: string
 
-  @hasMany(() => Request)
-  declare requests: HasMany<typeof Request>
+  @hasMany(() => ToolRequest)
+  declare requests: HasMany<typeof ToolRequest>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
