@@ -22,6 +22,12 @@ export default class Employee extends BaseModel {
   @column()
   declare identification_number: string
 
+  @column()
+  declare matricula_hi: string
+
+  @column()
+  declare correo_front_office: string
+
   @hasMany(() => ToolRequest)
   declare requests: HasMany<typeof ToolRequest>
 

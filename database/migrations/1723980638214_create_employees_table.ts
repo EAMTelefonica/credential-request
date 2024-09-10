@@ -22,6 +22,8 @@ export default class extends BaseSchema {
       table.text('card_id')
       table.boolean('has_front_office')
       table.boolean('has_open_gateway')
+      table.text('correo_front_office')
+      table.text('matricula_hi')
       table.text('confluence_id')
       table.text('atlas_id')
       table.text('zeus_id')

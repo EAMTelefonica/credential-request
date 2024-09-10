@@ -32,7 +32,9 @@
                         <div class="card-header">
                             <h3 class="card-title ">Solicitud alta diferentes Herramientas</h3>
                         </div>
-                        <form action="{{route('employees.request_tools.store', [employee.id])}}" method="POST">
+                        <form action="{{route('employees.request_tools.store', [employee.id])}}" method="POST"
+                            enctype="multipart/form-data">
+                            {{ csrfField() }}
                             <div class="card-body">
                                 <div class="col-sm-3">
                                     <div class="form-group ">
@@ -89,7 +91,7 @@
                                             {text:'Masculino',value:'soltero'},
                                             {text:'Femenino',value:'casado'}]
                                             })
-                                            {{ csrfField() }}
+
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
@@ -99,13 +101,13 @@
                                             {text:'Soltero',value:'soltero'},
                                             {text:'Casado',value:'casado'}]
                                             })
-                                            {{ csrfField() }}
+
                                         </div>
                                     </div>
 
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Fecha de Nacimiento',
-                                        id:'Fecha de Nacimiento' })
+                                        id:'fecha_nacimiento' })
                                     </div>
                                 </div>
 
@@ -131,7 +133,8 @@
                                                                 </strong>
                                                             </span>
                                                         <div class="input-group form-control">
-                                                            <input type="file" id="autitsm" name="autitsm" accept="*" />
+                                                            <input type="file" id="aut_itsm" name="aut_itsm"
+                                                                accept="*" />
                                                         </div>
                                                         </span></p>
                                                     </li>
