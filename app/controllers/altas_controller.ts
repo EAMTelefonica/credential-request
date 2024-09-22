@@ -53,8 +53,12 @@ export default class AltasController {
       `${tempPath}/${cuidfotodocu}`,
       employee
     )
-    await disk.deleteAll(stringuid)
-    await this.emailService.sendEmailForGuser(employee, values.EmailTechM)
+
+    await this.emailService.sendEmailForGuser(
+      `${tempPath}/${cuidfotocarnet}`,
+      employee,
+      values.EmailTechM
+    )
     console.log(values)
 
     const toolTarjeta = await Tool.findByOrFail('tool_name', 'Tarjeta telefonica')
@@ -67,7 +71,7 @@ export default class AltasController {
     await employee
       .related('requests')
       .firstOrCreate({ toolId: toolGuser.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
-
+    await disk.deleteAll(stringuid)
     return response.redirect().back()
   }
   async vaciar({}: HttpContext) {}

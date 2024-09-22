@@ -40,27 +40,26 @@
 
                         <form method="post">
                             <div class="card-body">
+                                <div class="form-group col-sm-4">
+                                    @!component('components/selectinput', { text: 'Estado',
+                                    options:[{text:'Sin Acceso',value:'sinacceso'},
+                                    {text:'Aprobado',value:'aprobado'},
+                                    {text:'Solicitado',value:'solicitado'}] })
+                                </div>
 
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        @!component('components/selectinput', { text: 'Estado',
-                                        id:'identification_type', options:[{text:'No',value:'no'},
-                                        {text:'Aprobado',value:'aprobado'},
-                                        {text:'Solicitado',value:'solicitado'}] })
-                                    </div>
+                                <div class="form-group col-sm-8">
+                                    <label for="SiteDescription">Acceso</label>
+                                    <textarea id="SiteDescription" class="form-control" rows="1"></textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="SiteDescription">Description</label>
                                     <textarea id="SiteDescription" class="form-control" rows="4"></textarea>
                                 </div>
-
-
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <a href="#" class="btn btn-secondary">Cancel</a>
-
+                                    <a href="#" class="btn btn-secondary">Actualizar</a>
                                 </div>
                             </div>
                         </form>

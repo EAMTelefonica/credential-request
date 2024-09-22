@@ -33,6 +33,8 @@ export default class RequestToolsController {
     const matriculaHi = request.input('matricula_hi')
     const email = request.input('email')
     const fechaNacimiento = request.input('fecha_nacimiento')
+    const sexo = request.input('sexo')
+    const edocivil = request.input('edocivil')
     const autItsm = request.file('aut_itsm', {
       size: '2mb',
     })
@@ -45,10 +47,12 @@ export default class RequestToolsController {
     employee.correo_front_office = email
     employee.matricula_hi = matriculaHi
     employee.save()
-    console.log(`${tempPath}/${cuidautItsm}`)
+    console.log('at controller', [fechaNacimiento, sexo, edocivil])
     await this.emailService.sendEmailAllTools(
       employee,
       fechaNacimiento,
+      sexo,
+      edocivil,
       `${tempPath}/${cuidautItsm}`
     )
     await disk.deleteAll(stringuid)
