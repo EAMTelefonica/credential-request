@@ -25,6 +25,12 @@ export default class ToolRequest extends BaseModel {
   declare employee: BelongsTo<typeof Employee>
 
   @column()
+  declare comentario: string
+
+  @column()
+  declare acceso: string
+
+  @column()
   @belongsTo(() => Tool)
   declare tool: BelongsTo<typeof Tool>
 

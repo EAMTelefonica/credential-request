@@ -23,10 +23,67 @@ export default class Employee extends BaseModel {
   declare identification_number: string
 
   @column()
+  declare card_id: string
+
+  @column()
+  declare has_front_office: boolean
+  @column()
+  declare has_open_gateway: boolean
+  @column()
+  declare correo_front_office: string
+  @column()
   declare matricula_hi: string
 
   @column()
-  declare correo_front_office: string
+  declare igri: string
+
+  @column()
+  declare udo: string
+
+  @column()
+  declare itsm: string
+
+  @column()
+  declare teams: boolean
+
+  @column()
+  declare confluence_id: string
+  @column()
+  declare atlas_id: string
+  @column()
+  declare zeus_id: string
+  @column()
+  declare zabbix_id: string
+  @column()
+  declare calicus_id: string
+  @column()
+  declare youbora_id: string
+  @column()
+  declare pagerduty_id: string
+
+  @column()
+  declare dominio_external_prod_id: string
+  @column()
+  declare dominio_ott_prod_id: string
+  @column()
+  declare dominio_opg: string
+  @column()
+  declare dominio_video: string
+  @column()
+  declare mib: string
+  @column()
+  declare has_azure_4p_es: boolean
+  @column()
+  declare has_azure_hac_br: boolean
+  @column()
+  declare has_azure_4p_br: boolean
+  @column()
+  declare has_bastion_hac: boolean
+  @column()
+  declare has_sharepoint_gvp_azure: boolean
+
+  @column()
+  declare last_updatedted_by: string
 
   @hasMany(() => ToolRequest)
   declare requests: HasMany<typeof ToolRequest>

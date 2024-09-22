@@ -35,7 +35,19 @@ export default class EmployeesController {
     const emp = await Employee.findOrFail(params.id)
     const requests = await emp.related('requests').query().preload('employee').preload('tool')
 
-    return view.render('pages/employees/employee_detail', { emp, requests })
+    const guserRequestStatus = await emp
+      .related('requests')
+      .query()
+      .select('request_status as status')
+      .where('toolId', '2')
+      .first()
+    console.log(guserRequestStatus?.$extras.status)
+    let canRequestAll = 'disabled'
+    if (guserRequestStatus?.$extras.status === 'SI') {
+      canRequestAll = 'enabled'
+    }
+
+    return view.render('pages/employees/employee_detail', { emp, requests, canRequestAll })
   }
 
   /**

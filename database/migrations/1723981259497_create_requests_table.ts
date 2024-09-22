@@ -8,6 +8,8 @@ export default class extends BaseSchema {
       table.increments('id')
       table.integer('employee_id').unsigned().references('employees.id').onDelete('CASCADE')
       table.integer('tool_id').unsigned().references('tools.id').onDelete('CASCADE')
+      table.text('comentario')
+      table.text('acceso')
       table.enum('request_type', ['ALTA', 'BAJA', 'MODIFICACION'], {
         useNative: true,
         enumName: 'request_type_enum',

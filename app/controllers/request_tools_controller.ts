@@ -1,5 +1,7 @@
 import Employee from '#models/employee'
+import Tool from '#models/tool'
 import EmailService from '#services/email_service'
+import EmployeeUtils from '#services/employee_util_service'
 import { inject } from '@adonisjs/core'
 import { cuid } from '@adonisjs/core/helpers'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -8,12 +10,16 @@ import drive from '@adonisjs/drive/services/main'
 
 @inject()
 export default class RequestToolsController {
-  constructor(protected emailService: EmailService) {}
+  constructor(
+    protected emailService: EmailService,
+    protected employeeUtils: EmployeeUtils
+  ) {}
   /**
    * Display a list of resource
    */
   async index({ params, view }: HttpContext) {
     const employee = await Employee.findByOrFail('id', params.employee_id)
+
     return view.render('pages/employees/employee_request_tools.edge', { employee })
   }
 
@@ -25,7 +31,7 @@ export default class RequestToolsController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request, params }: HttpContext) {
+  async store({ response, request, params }: HttpContext) {
     const disk = drive.use()
     const stringuid = `/temp/${cuid()}`
     const tempPath = `storage/${stringuid}`
@@ -55,7 +61,9 @@ export default class RequestToolsController {
       edocivil,
       `${tempPath}/${cuidautItsm}`
     )
+
     await disk.deleteAll(stringuid)
+    return response.redirect().toRoute('employees.show', [employee.id])
   }
 
   /**
@@ -71,7 +79,22 @@ export default class RequestToolsController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ request }: HttpContext) {}
+  async update({ request, params, response }: HttpContext) {
+    const values = request.all()
+    const employee = await Employee.findByOrFail('id', params.employee_id)
+    const toolRequest = await employee
+      .related('requests')
+      .query()
+      .where('id', params.id)
+      .firstOrFail()
+    const tool = await Tool.findByOrFail('id', toolRequest.toolId)
+    toolRequest.request_status = request.input('status')
+    toolRequest.acceso = request.input('acceso')
+    toolRequest.comentario = request.input('comentario')
+    await toolRequest.save()
+    this.employeeUtils.UpdateEmployeeDataForTool(employee, tool, request.input('acceso'))
+    return response.redirect().back()
+  }
 
   /**
    * Delete record

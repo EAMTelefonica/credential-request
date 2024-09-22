@@ -74,5 +74,4 @@ export default class AltasController {
     await disk.deleteAll(stringuid)
     return response.redirect().back()
   }
-  async vaciar({}: HttpContext) {}
 }

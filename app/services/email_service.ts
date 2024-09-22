@@ -1,7 +1,12 @@
 import Employee from '#models/employee'
+import { inject } from '@adonisjs/core'
 import app from '@adonisjs/core/services/app'
 import mail from '@adonisjs/mail/services/main'
+import ToolRequestService from './tool_request_service.js'
+
+@inject()
 export default class EmailService {
+  constructor(protected toolRequest: ToolRequestService) {}
   async sentEmailForFrontoffice(employee: Employee) {
     const info = {}
     await mail.send((message) => {
@@ -59,8 +64,11 @@ export default class EmailService {
     aut_itsmPath: string
   ) {
     console.log('at senemailall', [fechaNacimiento, edocivil, sexo])
+
     await this.sendAltaIgri(employee)
+
     await this.sendAltaConfluence(employee)
+
     await this.sendBuzonesFo(employee)
     await this.sendAltaUdo(employee)
     await this.sendAltaTeams(employee)
@@ -79,6 +87,7 @@ export default class EmailService {
         .subject(`Alta usuario igri `)
         .htmlView('emailtemplate/alta_igri.edge', { employee })
     })
+    await this.toolRequest.createRequestForIgri(employee)
   }
   async sendAltaConfluence(employee: Employee) {
     await mail.send((message) => {
@@ -90,6 +99,7 @@ export default class EmailService {
         .subject(`Alta usuario confluence `)
         .htmlView('emailtemplate/alta_confluence.edge', { employee })
     })
+    await this.toolRequest.createRequestForConfluence(employee)
   }
   async sendBuzonesFo(employee: Employee) {
     await mail.send((message) => {
@@ -101,6 +111,8 @@ export default class EmailService {
         .subject(`grupos AD - o365 y buzón front.office.gvp-support y frontoffice_customersupport`)
         .htmlView('emailtemplate/alta_buzonesFo.edge', { employee })
     })
+    await this.toolRequest.createRequestForBuzonFoSupport(employee)
+    await this.toolRequest.createRequestForBuzonFoCustomerSupport(employee)
   }
 
   async sendAltaUdo(employee: Employee) {
@@ -113,6 +125,7 @@ export default class EmailService {
         .subject(`Solicitud creacion de Usuario UDO `)
         .htmlView('emailtemplate/alta_udo.edge', { employee })
     })
+    await this.toolRequest.createRequestForUDO(employee)
   }
   async sendAltaTeams(employee: Employee) {
     await mail.send((message) => {
@@ -124,6 +137,7 @@ export default class EmailService {
         .subject(`Solicitud acceso a Teams `)
         .htmlView('emailtemplate/alta_teams.edge', { employee })
     })
+    await this.toolRequest.createRequestForTeams(employee)
   }
   async sendAltaITSM(employee: Employee, aut_itsmPath: string) {
     await mail.send((message) => {
@@ -136,6 +150,7 @@ export default class EmailService {
         .subject(`Alta en buzones ITSM`)
         .htmlView('emailtemplate/alta_solicitud_itsm.edge', { employee })
     })
+    await this.toolRequest.createRequestForITSM(employee)
   }
   async sendAltavivohac(employee: Employee) {
     await mail.send((message) => {
@@ -147,6 +162,7 @@ export default class EmailService {
         .subject(`Acceso azure vivo HAC nuevo usuario BR`)
         .htmlView('emailtemplate/alta_vivo_hac.edge', { employee })
     })
+    await this.toolRequest.createRequestForVivohac(employee)
   }
   async sendAltavivoform(
     employee: Employee,
@@ -164,5 +180,6 @@ export default class EmailService {
         .subject(`Acceso azure vivo nuevo usuario BR`)
         .htmlView('emailtemplate/alta_vivoform.edge', { employee, fechaNacimiento, edocivil, sexo })
     })
+    await this.toolRequest.createRequestForVivoForm(employee)
   }
 }

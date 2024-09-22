@@ -1,0 +1,49 @@
+<div class="modal fade" id="modal-request-{{id}}" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Default Modal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="{{route('employees.request_tools.update', [employeeid, id])}}?_method=PUT" method="POST">
+                {{ csrfField() }}
+                <div class="modal-body">
+
+                    <input type="hidden" name="tool_id" value="{{tool_id}}">
+
+                    @!component('components/selectinput', { text: 'Estado', id:'status',
+                    options:[{text:'Sin Acceso',value:'NO', isselected: request_status==='NO'?'selected':''},
+                    {text:'Aprobado',value:'SI', isselected: request_status==='SI'?'selected':''},
+                    {text:'Solicitado',value:'SOLICITADA', isselected: request_status==='SOLICITADA'?'selected':''}] })
+
+
+                    @if(tool_id==2)
+                    @!component('components/formtextinput', { text: 'HI/IDX',
+                    id:'acceso' })
+                    @else
+                    @!component('components/formtextinput', { text: 'Acceso',
+                    id:'acceso' })
+
+                    @end
+
+
+
+
+
+                    @!component('components/formtextarea', { text: 'Commentario',
+                    id:'comentario' })
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>

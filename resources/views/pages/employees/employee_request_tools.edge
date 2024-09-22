@@ -10,8 +10,11 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="">Home</a></li>
-                        <li class="breadcrumb-item active"></li>
+                        <li class="breadcrumb-item"><a href="{{route('employees.index')}}">Empleados</a></li>
+                        <li class="breadcrumb-item active"> <a
+                                href="{{route('employees.show', [employee.id])}}">{{employee.firstname}}
+                                {{employee.lastname}}</a>
+                        </li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -65,7 +68,7 @@
 
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Matricula',
-                                        id:'matricula_hi' })
+                                        id:'matricula_hi' , value: employee.matricula_hi })
                                     </div>
 
                                     <div class="col-sm-3">
