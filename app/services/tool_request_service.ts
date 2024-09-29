@@ -56,4 +56,149 @@ export default class ToolRequestService {
       .related('requests')
       .firstOrCreate({ toolId: vivo.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
   }
+  async createRequestForCalicux(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Calicux')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForAtlas(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Atlas')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForZeus(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Zeus')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForZabbix(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Zabbix')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForYoubora(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Youbora')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForPagerDuty(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'PagerDuty')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForDExternalPro(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Dominio externalPro')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForDOTTPro(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Dominio OTTPro')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForDOpenGateway(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Dominio OpenGateway')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForDVideoPlataforma(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Dominio VideoPlataforma')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForMIB(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'MIB')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForSharePointGVPAzure(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'SharePoint GVP Azure')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForTechnicalDescription(employee: Employee, baseurl: string, eid: string) {
+    const Calicux = await Tool.findByOrFail('tool_name', 'Technical Description')
+    await employee.related('requests').firstOrCreate({
+      toolId: Calicux.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestUdoHerramientasVideo(employee: Employee, baseurl: string, eid: string) {
+    await this.createRequestForAtlas(employee, baseurl, eid)
+    await this.createRequestForZeus(employee, baseurl, eid)
+    await this.createRequestForZabbix(employee, baseurl, eid)
+    await this.createRequestForCalicux(employee, baseurl, eid)
+    await this.createRequestForYoubora(employee, baseurl, eid)
+    await this.createRequestForPagerDuty(employee, baseurl, eid)
+    await this.createRequestForDExternalPro(employee, baseurl, eid)
+    await this.createRequestForDOTTPro(employee, baseurl, eid)
+    await this.createRequestForDOpenGateway(employee, baseurl, eid)
+    await this.createRequestForDVideoPlataforma(employee, baseurl, eid)
+    await this.createRequestForMIB(employee, baseurl, eid)
+    await this.createRequestForSharePointGVPAzure(employee, baseurl, eid)
+    await this.createRequestForTechnicalDescription(employee, baseurl, eid)
+  }
 }

@@ -28,8 +28,10 @@
 
                     @end
 
-
-
+                    @if(tool_id==2)
+                    @!component('components/formtextinput', { text: 'Correo FrontOffice',
+                    id:'correofo' })
+                    @end
 
 
                     @!component('components/formtextarea', { text: 'Commentario',

@@ -2,13 +2,14 @@ import Employee from '#models/employee'
 import Tool from '#models/tool'
 import logger from '@adonisjs/core/services/logger'
 export default class EmployeeUtils {
-  async UpdateEmployeeDataForTool(employee: Employee, tool: Tool, value: string) {
+  async UpdateEmployeeDataForTool(employee: Employee, tool: Tool, value: string, correofo: string) {
     switch (tool.tool_name) {
       case 'Tarjeta telefonica':
         employee.card_id = value
         break
       case 'G-user':
         employee.matricula_hi = value
+        employee.correo_front_office = correofo
         break
       case 'IGRI':
         employee.igri = value

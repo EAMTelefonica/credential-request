@@ -48,7 +48,7 @@ router
 router
   .resource('employees.request_tools', RequestToolsController)
   .use(['index', 'create', 'store', 'update', 'show', 'edit', 'destroy'], middleware.auth())
-  .only(['index', 'show', 'store', 'update'])
+  .only(['index', 'show', 'store', 'update', 'edit'])
 
 // rutas alta
 router.get('alta', [AltasController, 'alta']).as('alta')

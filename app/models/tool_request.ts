@@ -31,6 +31,12 @@ export default class ToolRequest extends BaseModel {
   declare acceso: string
 
   @column()
+  declare udo_number: string
+
+  @column()
+  declare udo_host: string
+
+  @column()
   @belongsTo(() => Tool)
   declare tool: BelongsTo<typeof Tool>
 

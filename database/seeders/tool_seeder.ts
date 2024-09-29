@@ -105,5 +105,123 @@ export default class extends BaseSeeder {
       email_bc: '',
       email_cc: '',
     })
+
+    await Tool.firstOrCreate({
+      tool_name: 'Atlas',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Zeus',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Zabbix',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Calicux',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Youbora',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'PagerDuty',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Dominio externalPro',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Dominio OTTPro',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Dominio OpenGateway',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Dominio VideoPlataforma',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'MIB',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'SharePoint GVP Azure',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Technical Description',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
   }
 }

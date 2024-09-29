@@ -2,6 +2,7 @@ import Employee from '#models/employee'
 import Tool from '#models/tool'
 import EmailService from '#services/email_service'
 import EmployeeUtils from '#services/employee_util_service'
+import UdoUtils from '#services/udo_util_service'
 import { inject } from '@adonisjs/core'
 import { cuid } from '@adonisjs/core/helpers'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -12,7 +13,8 @@ import drive from '@adonisjs/drive/services/main'
 export default class RequestToolsController {
   constructor(
     protected emailService: EmailService,
-    protected employeeUtils: EmployeeUtils
+    protected employeeUtils: EmployeeUtils,
+    protected udoUtils: UdoUtils
   ) {}
   /**
    * Display a list of resource
@@ -53,6 +55,7 @@ export default class RequestToolsController {
     employee.correo_front_office = email
     employee.matricula_hi = matriculaHi
     employee.save()
+    //envio de correos request
     console.log('at controller', [fechaNacimiento, sexo, edocivil])
     await this.emailService.sendEmailAllTools(
       employee,
@@ -61,8 +64,16 @@ export default class RequestToolsController {
       edocivil,
       `${tempPath}/${cuidautItsm}`
     )
-
     await disk.deleteAll(stringuid)
+    //fin envio de correos request
+
+    // creacion de udo
+    try {
+      const results = await this.udoUtils.createUdoForHeramientasVideo(employee)
+    } catch (error) {}
+
+    // fin de creacion de udo
+
     return response.redirect().toRoute('employees.show', [employee.id])
   }
 
@@ -74,7 +85,11 @@ export default class RequestToolsController {
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params }: HttpContext) {
+    const data = await this.udoUtils.test()
+    console.log(data)
+    console.log('esto es una prueba')
+  }
 
   /**
    * Handle form submission for the edit action
@@ -92,7 +107,12 @@ export default class RequestToolsController {
     toolRequest.acceso = request.input('acceso')
     toolRequest.comentario = request.input('comentario')
     await toolRequest.save()
-    this.employeeUtils.UpdateEmployeeDataForTool(employee, tool, request.input('acceso'))
+    this.employeeUtils.UpdateEmployeeDataForTool(
+      employee,
+      tool,
+      request.input('acceso'),
+      request.input('correofo')
+    )
     return response.redirect().back()
   }
 

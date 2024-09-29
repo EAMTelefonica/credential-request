@@ -17,6 +17,14 @@ export default await Env.create(new URL('../', import.meta.url), {
   APP_KEY: Env.schema.string(),
   HOST: Env.schema.string({ format: 'host' }),
   LOG_LEVEL: Env.schema.string(),
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring UDO ACCESS
+  |----------------------------------------------------------
+  */
+  UDO_URL: Env.schema.string({ format: 'host' }),
+  UDO_USER: Env.schema.string(),
+  UDO_PASS: Env.schema.string.optional(),
 
   /*
   |----------------------------------------------------------
@@ -49,5 +57,5 @@ export default await Env.create(new URL('../', import.meta.url), {
   | Variables for configuring the drive package
   |----------------------------------------------------------
   */
-  DRIVE_DISK: Env.schema.enum(['fs'] as const)
+  DRIVE_DISK: Env.schema.enum(['fs'] as const),
 })
