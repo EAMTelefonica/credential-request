@@ -1,6 +1,6 @@
 import Employee from '#models/employee'
 import Tool from '#models/tool'
-
+import logger from '@adonisjs/core/services/logger'
 export default class EmployeeUtils {
   async UpdateEmployeeDataForTool(employee: Employee, tool: Tool, value: string) {
     switch (tool.tool_name) {
@@ -40,6 +40,11 @@ export default class EmployeeUtils {
       default:
         break
     }
-    await employee.save()
+    try {
+      await employee.save()
+    } catch (error) {
+      logger.error(error)
+      console.log(error)
+    }
   }
 }
