@@ -145,8 +145,13 @@
                                         {{ csrfField() }}
                                     </div>
                                     <div class="col-sm-2">
-                                        @!component('components/formtextinput', { text: 'PagerDuty',
-                                        id:'pagerduty' })
+                                        @!component('components/selectinput', { text: 'PagerDuty',
+                                        id:'PagerDuty', options:[
+                                        {text:'CDN',value:'cdn'},
+                                        {text:'GVP',value:'gvp'},
+                                        {text:'PLATAFORMA',value:'plataforma'}]
+                                        })
+                                        {{ csrfField() }}
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Dominio ExternalProd',
@@ -171,6 +176,15 @@
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'Azure 4P ES',
                                         id:'azure_4p_es', options:[
+                                        {text:'Si',value:'si'},
+                                        {text:'No',value:'no'},
+                                        {text:'Solicitado',value:'solicitado'}]
+                                        })
+                                        {{ csrfField() }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @!component('components/selectinput', { text: 'Azure HAC ES',
+                                        id:'azure_hac_es', options:[
                                         {text:'Si',value:'si'},
                                         {text:'No',value:'no'},
                                         {text:'Solicitado',value:'solicitado'}]

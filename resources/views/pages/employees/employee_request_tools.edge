@@ -77,6 +77,16 @@
                                             id:'email', value: employee.correo_front_office })
                                         </div>
                                     </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/selectinput', { text: 'PagerDuty',
+                                            id:'pagerduty', options:[
+                                            {text:'CDN',value:'CDN'},
+                                            {text:'GVP',value:'GVP'},
+                                            {text:'PPGG',value:'PPGG'}]
+                                            })
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group ">

@@ -16,6 +16,9 @@ export default class RequestToolsController {
     protected employeeUtils: EmployeeUtils,
     protected udoUtils: UdoUtils
   ) {}
+  sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  }
   /**
    * Display a list of resource
    */
@@ -43,6 +46,7 @@ export default class RequestToolsController {
     const fechaNacimiento = request.input('fecha_nacimiento')
     const sexo = request.input('sexo')
     const edocivil = request.input('edocivil')
+    const pagerduty = request.input('pagerduty')
     const autItsm = request.file('aut_itsm', {
       size: '2mb',
     })
@@ -69,8 +73,12 @@ export default class RequestToolsController {
 
     // creacion de udo
     try {
-      const results = await this.udoUtils.createUdoForHeramientasVideo(employee)
-    } catch (error) {}
+      await this.udoUtils.createUdoForHeramientasVideo(employee, pagerduty)
+      await this.sleep(2000)
+      await this.udoUtils.createUdoForHAC(employee)
+    } catch (error) {
+      console.log(['error', error])
+    }
 
     // fin de creacion de udo
 

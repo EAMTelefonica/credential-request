@@ -223,5 +223,32 @@ export default class extends BaseSeeder {
       email_bc: '',
       email_cc: '',
     })
+    await Tool.firstOrCreate({
+      tool_name: 'Bastion HAC ES',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Azure HAC ES',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
+    await Tool.firstOrCreate({
+      tool_name: 'Azure 4P ES',
+      required_view: '',
+      updated_view: '',
+      email_template: '',
+      email_to: '',
+      email_bc: '',
+      email_cc: '',
+    })
   }
 }

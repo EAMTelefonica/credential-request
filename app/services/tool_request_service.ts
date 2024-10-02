@@ -27,39 +27,39 @@ export default class ToolRequestService {
       .firstOrCreate({ toolId: buzonFo.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
   }
   async createRequestForUDO(employee: Employee) {
-    const udo = await Tool.findByOrFail('tool_name', 'Udo')
+    const tool = await Tool.findByOrFail('tool_name', 'Udo')
     await employee
       .related('requests')
-      .firstOrCreate({ toolId: udo.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
+      .firstOrCreate({ toolId: tool.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
   }
   async createRequestForTeams(employee: Employee) {
-    const teams = await Tool.findByOrFail('tool_name', 'Teams')
+    const tool = await Tool.findByOrFail('tool_name', 'Teams')
     await employee
       .related('requests')
-      .firstOrCreate({ toolId: teams.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
+      .firstOrCreate({ toolId: tool.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
   }
   async createRequestForITSM(employee: Employee) {
-    const ITSM = await Tool.findByOrFail('tool_name', 'ITSM')
+    const tool = await Tool.findByOrFail('tool_name', 'ITSM')
     await employee
       .related('requests')
-      .firstOrCreate({ toolId: ITSM.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
+      .firstOrCreate({ toolId: tool.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
   }
   async createRequestForVivohac(employee: Employee) {
-    const vivohac = await Tool.findByOrFail('tool_name', 'vivohac')
+    const tool = await Tool.findByOrFail('tool_name', 'vivohac')
     await employee
       .related('requests')
-      .firstOrCreate({ toolId: vivohac.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
+      .firstOrCreate({ toolId: tool.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
   }
   async createRequestForVivoForm(employee: Employee) {
-    const vivo = await Tool.findByOrFail('tool_name', 'vivo')
+    const tool = await Tool.findByOrFail('tool_name', 'vivo')
     await employee
       .related('requests')
-      .firstOrCreate({ toolId: vivo.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
+      .firstOrCreate({ toolId: tool.id, request_type: 'ALTA', request_status: 'SOLICITADA' })
   }
-  async createRequestForCalicux(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Calicux')
+  async createRequestFortool(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Calicux')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -67,9 +67,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForAtlas(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Atlas')
+    const tool = await Tool.findByOrFail('tool_name', 'Atlas')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -77,9 +77,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForZeus(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Zeus')
+    const tool = await Tool.findByOrFail('tool_name', 'Zeus')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -87,9 +87,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForZabbix(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Zabbix')
+    const tool = await Tool.findByOrFail('tool_name', 'Zabbix')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -97,9 +97,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForYoubora(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Youbora')
+    const tool = await Tool.findByOrFail('tool_name', 'Youbora')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -107,9 +107,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForPagerDuty(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'PagerDuty')
+    const tool = await Tool.findByOrFail('tool_name', 'PagerDuty')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -117,9 +117,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForDExternalPro(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Dominio externalPro')
+    const tool = await Tool.findByOrFail('tool_name', 'Dominio externalPro')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -127,9 +127,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForDOTTPro(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Dominio OTTPro')
+    const tool = await Tool.findByOrFail('tool_name', 'Dominio OTTPro')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -137,9 +137,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForDOpenGateway(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Dominio OpenGateway')
+    const tool = await Tool.findByOrFail('tool_name', 'Dominio OpenGateway')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -147,9 +147,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForDVideoPlataforma(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Dominio VideoPlataforma')
+    const tool = await Tool.findByOrFail('tool_name', 'Dominio VideoPlataforma')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -157,9 +157,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForMIB(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'MIB')
+    const tool = await Tool.findByOrFail('tool_name', 'MIB')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -167,9 +167,9 @@ export default class ToolRequestService {
     })
   }
   async createRequestForSharePointGVPAzure(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'SharePoint GVP Azure')
+    const tool = await Tool.findByOrFail('tool_name', 'SharePoint GVP Azure')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -177,9 +177,39 @@ export default class ToolRequestService {
     })
   }
   async createRequestForTechnicalDescription(employee: Employee, baseurl: string, eid: string) {
-    const Calicux = await Tool.findByOrFail('tool_name', 'Technical Description')
+    const tool = await Tool.findByOrFail('tool_name', 'Technical Description')
     await employee.related('requests').firstOrCreate({
-      toolId: Calicux.id,
+      toolId: tool.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForBastionES(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Bastion HAC ES')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForAzureHacES(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Azure HAC ES')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForAzure4PES(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Azure 4P ES')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
       request_type: 'ALTA',
       request_status: 'SOLICITADA',
       udo_host: baseurl,
@@ -190,7 +220,7 @@ export default class ToolRequestService {
     await this.createRequestForAtlas(employee, baseurl, eid)
     await this.createRequestForZeus(employee, baseurl, eid)
     await this.createRequestForZabbix(employee, baseurl, eid)
-    await this.createRequestForCalicux(employee, baseurl, eid)
+    await this.createRequestFortool(employee, baseurl, eid)
     await this.createRequestForYoubora(employee, baseurl, eid)
     await this.createRequestForPagerDuty(employee, baseurl, eid)
     await this.createRequestForDExternalPro(employee, baseurl, eid)
@@ -200,5 +230,9 @@ export default class ToolRequestService {
     await this.createRequestForMIB(employee, baseurl, eid)
     await this.createRequestForSharePointGVPAzure(employee, baseurl, eid)
     await this.createRequestForTechnicalDescription(employee, baseurl, eid)
+  }
+  async createRequestUdoAzureHacBastionES(employee: Employee, baseurl: string, eid: string) {
+    await this.createRequestForBastionES(employee, baseurl, eid)
+    await this.createRequestForAzureHacES(employee, baseurl, eid)
   }
 }
