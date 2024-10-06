@@ -13,10 +13,12 @@ const EmployeesController = () => import('#controllers/employees_controller')
 const RequestsController = () => import('#controllers/requests_controller')
 const AltasController = () => import('#controllers/altas_controller')
 const RequestToolsController = () => import('#controllers/request_tools_controller')
+const DataController = () => import('#controllers/data_controller')
+const HomeController = () => import('#controllers/home_controller')
 
 router.on('/').render('pages/login/login.edge')
 router.on('/template').render('all_template')
-router.on('/home').render('pages/home').use(middleware.auth()).as('home')
+router.get('home', [HomeController, 'home']).as('home').use(middleware.auth())
 
 router.on('/edit').render('pages/employees/employee_detail_form.edge').as('detail_form.edit')
 // router
@@ -53,3 +55,6 @@ router
 // rutas alta
 router.get('alta', [AltasController, 'alta']).as('alta')
 router.post('processAlta', [AltasController, 'procesarAlta']).as('procesar_alta')
+
+// rutas data
+router.get('data', [DataController, 'AllData']).as('alldata').use(middleware.auth())

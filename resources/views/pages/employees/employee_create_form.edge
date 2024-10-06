@@ -35,6 +35,7 @@
 
 
                         <form action="{{route('employees.store')}}" method="POST">
+                            {{ csrfField() }}
                             <div class="card-body">
                                 <div class="row">
 
@@ -60,7 +61,7 @@
                                         {text:'operador',value:'operador'},
                                         {text:'cordinador',value:'cordinador'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Matrícula HI',
@@ -68,11 +69,11 @@
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Correo Telefónica FO',
-                                        id:'email' })
+                                        id:'correo_front_office' })
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Nº tarjeta',
-                                        id:'tarjeta_id' })
+                                        id:'card_id' })
                                     </div>
                                 </div>
 
@@ -99,67 +100,66 @@
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'Buzon FrontOffice',
-                                        id:'buzon_front_Office', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
+                                        id:'has_front_office', options:[
+                                        {text:'Si',value:'true'},
+                                        {text:'No',value:'false'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'Buzón OpenGateway',
-                                        id:'buzon_front_Office', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
+                                        id:'has_open_gateway', options:[
+                                        {text:'Si',value:'true'},
+                                        {text:'No',value:'false'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Confluence',
-                                        id:'confluence' })
+                                        id:'confluence_id' })
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Atlas',
-                                        id:'atlas' })
+                                        id:'atlas_id' })
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Zeus',
-                                        id:'zeus' })
+                                        id:'zeus_id' })
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Zabbix',
-                                        id:'zabbix' })
+                                        id:'zabbix_id' })
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Calicux',
-                                        id:'calicux' })
+                                        id:'calicus_id' })
                                     </div>
                                     <div class="col-sm-2">
-                                        @!component('components/selectinput', { text: 'Youbora',
-                                        id:'youbora', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
-                                        })
-                                        {{ csrfField() }}
+                                        @!component('components/formtextinput', { text: 'Youbora',
+                                        id:'youbora_id' })
                                     </div>
+
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'PagerDutyID',
+                                        id:'pagerduty_id' })
+                                    </div>
+
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'PagerDuty',
-                                        id:'PagerDuty', options:[
+                                        id:'pagerduty_platform', options:[
                                         {text:'CDN',value:'cdn'},
                                         {text:'GVP',value:'gvp'},
-                                        {text:'PLATAFORMA',value:'plataforma'}]
+                                        {text:'PPGG',value:'ppgg'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Dominio ExternalProd',
-                                        id:'dominio_externalprod' })
+                                        id:'dominio_external_prod_id' })
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Dominio OttProd',
-                                        id:'dominio_ottprod' })
+                                        id:'dominio_ott_prod_id' })
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Dominio OPG',
@@ -167,7 +167,7 @@
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'Dominio VideoPlatform',
-                                        id:'dominio_videoplatform' })
+                                        id:'dominio_video' })
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/formtextinput', { text: 'MIB',
@@ -175,57 +175,51 @@
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'Azure 4P ES',
-                                        id:'azure_4p_es', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
+                                        id:'has_azure_4_p_es', options:[
+                                        {text:'Si',value:'true'},
+                                        {text:'No',value:'false'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'Azure HAC ES',
-                                        id:'azure_hac_es', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
+                                        id:'has_azure_hac_es', options:[
+                                        {text:'Si',value:'true'},
+                                        {text:'No',value:'false'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'Azure HAC BR',
-                                        id:'azure_hac_br', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
+                                        id:'has_azure_hac_br', options:[
+                                        {text:'Si',value:'true'},
+                                        {text:'No',value:'false'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'Azure 4P BR',
-                                        id:'azure_4p_br', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
+                                        id:'has_azure_4_p_br', options:[
+                                        {text:'Si',value:'true'},
+                                        {text:'No',value:'false'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'Bastión HAAC',
-                                        id:'bastión_haac', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
+                                        id:'has_bastion_hac', options:[
+                                        {text:'Si',value:'true'},
+                                        {text:'No',value:'false'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
                                     <div class="col-sm-2">
                                         @!component('components/selectinput', { text: 'SharePoint GVP Azure',
-                                        id:'sharepoint_gvp_azure', options:[
-                                        {text:'Si',value:'si'},
-                                        {text:'No',value:'no'},
-                                        {text:'Solicitado',value:'solicitado'}]
+                                        id:'has_sharepoint_gvp_azure', options:[
+                                        {text:'Si',value:'true'},
+                                        {text:'No',value:'false'}]
                                         })
-                                        {{ csrfField() }}
+
                                     </div>
 
 

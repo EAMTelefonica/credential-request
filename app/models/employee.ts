@@ -62,6 +62,9 @@ export default class Employee extends BaseModel {
   declare pagerduty_id: string
 
   @column()
+  declare pagerduty_platform: string
+
+  @column()
   declare dominio_external_prod_id: string
   @column()
   declare dominio_ott_prod_id: string
@@ -73,6 +76,8 @@ export default class Employee extends BaseModel {
   declare mib: string
   @column()
   declare has_azure_4p_es: boolean
+  @column()
+  declare has_azure_hac_es: boolean
   @column()
   declare has_azure_hac_br: boolean
   @column()
