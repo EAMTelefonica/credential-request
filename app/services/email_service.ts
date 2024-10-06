@@ -75,6 +75,7 @@ export default class EmailService {
     await this.sendAltaITSM(employee, aut_itsmPath)
     await this.sendAltavivohac(employee)
     await this.sendAltavivoform(employee, fechaNacimiento, edocivil, sexo)
+    await this.sendUdos(employee)
   }
 
   async sendAltaIgri(employee: Employee) {
@@ -181,5 +182,17 @@ export default class EmailService {
         .htmlView('emailtemplate/alta_vivoform.edge', { employee, fechaNacimiento, edocivil, sexo })
     })
     await this.toolRequest.createRequestForVivoForm(employee)
+  }
+  async sendUdos(employee: Employee) {
+    console.log('at SendUDos')
+    await mail.send((message) => {
+      message
+        .to('evely.adrianzamorales.ext@telefonica.com')
+        .cc('evely.adrianzamorales.ext@telefonica.com')
+        .bcc('evely.adrianzamorales.ext@telefonica.com')
+        .from('evely.adrianzamorales.ext@telefonica.com')
+        .subject(`Aperturas de Udos para alta de usuario Front-Office`)
+        .htmlView('emailtemplate/send_udos.edge', { employee })
+    })
   }
 }

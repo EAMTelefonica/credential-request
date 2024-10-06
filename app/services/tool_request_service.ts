@@ -206,16 +206,6 @@ export default class ToolRequestService {
       udo_number: eid ? eid : 'empty',
     })
   }
-  async createRequestForAzure4PES(employee: Employee, baseurl: string, eid: string) {
-    const tool = await Tool.findByOrFail('tool_name', 'Azure 4P ES')
-    await employee.related('requests').firstOrCreate({
-      toolId: tool.id,
-      request_type: 'ALTA',
-      request_status: 'SOLICITADA',
-      udo_host: baseurl,
-      udo_number: eid ? eid : 'empty',
-    })
-  }
   async createRequestUdoHerramientasVideo(employee: Employee, baseurl: string, eid: string) {
     await this.createRequestForAtlas(employee, baseurl, eid)
     await this.createRequestForZeus(employee, baseurl, eid)
@@ -234,5 +224,15 @@ export default class ToolRequestService {
   async createRequestUdoAzureHacBastionES(employee: Employee, baseurl: string, eid: string) {
     await this.createRequestForBastionES(employee, baseurl, eid)
     await this.createRequestForAzureHacES(employee, baseurl, eid)
+  }
+  async createRequestForAzure4PES(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Azure 4P ES')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'ALTA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
   }
 }

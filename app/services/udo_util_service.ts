@@ -123,4 +123,132 @@ export default class UdoUtils {
 
     return responseData
   }
+  async createUdoForAzure4P(employee: Employee) {
+    const url = `http://${this.baseurl}/api/tt/contacts/?retrieve_param=eid`
+    const options = {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': `Basic ${this.auth}`,
+      },
+      json: {
+        type: 'Order',
+        customer_name: 'Front Office',
+        servicios_kernel: ['Pendiente de incluir'],
+        responsible_group: 'gvp_noc_front_office',
+        originator_group: ['gvp_noc_front_office'],
+        platform_service: ['MONITORING'],
+        platform: ['INFRASTRUCTURE'],
+        req_viewer_groups: [
+          'DELIVERY',
+          'GESCAM_MAD',
+          'L2_4P',
+          'L2_AURA',
+          'L3_4P',
+          'L3_AURA',
+          'L3_Haac',
+          'L3_LA',
+          'L3_SW',
+          'Lec_4P_AURA_LA',
+          'SEG_BSU',
+          'SOM__AURA',
+          'VIDEO_L2_Servicio',
+          'dsmc_adv_nfh',
+          'gvp_noc_front_office',
+          'videoTOOLS',
+        ],
+        functionality: ['MONITORING'],
+        component: ['ZABBIX'],
+        subject:
+          'Petición de accesos a las suscripciones de Azure para nuevos operadores de N1. (Se detalla en la descripción)',
+        description: {
+          code: 'free_text_template',
+          contexts: [
+            [
+              `Por favor dar accesos a los siguientes operadores de N1 a todas las suscripciones de Azure. Tomad como ejemplo las mismas suscripciones que tiene el usuario Amadeo Gonzalez Pelaez  IDX0395  e.frontofficepg31.tid@telefonica.com (se adjunta captura) [ TE_4P_HAAC_PRO / 4P ES producción / España Aura / MAKER ES producción / Telefonica ].\nConcretamente para:\n${employee.firstname} ${employee.lastname}(${employee.matricula_hi} / ${employee.correo_front_office})`,
+            ],
+          ],
+        },
+        annotations: [],
+        attachments: [],
+        customerservice: 'CS_4P',
+        public: false,
+      },
+    }
+
+    let responseData: any = {}
+    try {
+      responseData = await got.post(url, options).json()
+    } catch (error) {
+      console.log(error)
+    }
+    console.log('acontinuacion la respuesta del udo de 4p ES')
+    console.log(responseData)
+    await this.toolRequest.createRequestForAzure4PES(employee, this.baseurl, responseData?.eid)
+
+    return responseData
+  }
+  async createUdoITSM(employee: Employee) {
+    const url = `http://${this.baseurl}/api/tt/contacts/?retrieve_param=eid`
+    const options = {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': `Basic ${this.auth}`,
+      },
+      json: {
+        type: 'Order',
+        customer_name: 'Front Office',
+        servicios_kernel: ['Pendiente de incluir'],
+        responsible_group: 'gvp_noc_front_office',
+        originator_group: ['gvp_noc_front_office'],
+        platform_service: ['MONITORING'],
+        platform: ['INFRASTRUCTURE'],
+        req_viewer_groups: [
+          'DELIVERY',
+          'GESCAM_MAD',
+          'L2_4P',
+          'L2_AURA',
+          'L3_4P',
+          'L3_AURA',
+          'L3_Haac',
+          'L3_LA',
+          'L3_SW',
+          'Lec_4P_AURA_LA',
+          'SEG_BSU',
+          'SOM__AURA',
+          'VIDEO_L2_Servicio',
+          'dsmc_adv_nfh',
+          'gvp_noc_front_office',
+          'videoTOOLS',
+        ],
+        functionality: ['MONITORING'],
+        component: ['ZABBIX'],
+        subject:
+          'Petición de accesos a las suscripciones de Azure para nuevos operadores de N1. (Se detalla en la descripción)',
+        description: {
+          code: 'free_text_template',
+          contexts: [
+            [
+              `Por favor dar accesos a los siguientes operadores de N1 a todas las suscripciones de Azure. Tomad como ejemplo las mismas suscripciones que tiene el usuario Amadeo Gonzalez Pelaez  IDX0395  e.frontofficepg31.tid@telefonica.com (se adjunta captura) [ TE_4P_HAAC_PRO / 4P ES producción / España Aura / MAKER ES producción / Telefonica ].\nConcretamente para:\n${employee.firstname} ${employee.lastname}(${employee.matricula_hi} / ${employee.correo_front_office})`,
+            ],
+          ],
+        },
+        annotations: [],
+        attachments: [],
+        customerservice: 'CS_4P',
+        public: false,
+      },
+    }
+
+    let responseData: any = {}
+    try {
+      responseData = await got.post(url, options).json()
+    } catch (error) {
+      console.log(error)
+    }
+    console.log('acontinuacion la respuesta del udo de ITSM')
+    console.log(responseData)
+    // await this.toolRequest.createRequestForItsm(employee, this.baseurl, responseData?.eid)
+
+    return responseData
+  }
 }

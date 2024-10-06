@@ -76,6 +76,8 @@ export default class RequestToolsController {
       await this.udoUtils.createUdoForHeramientasVideo(employee, pagerduty)
       await this.sleep(2000)
       await this.udoUtils.createUdoForHAC(employee)
+      await this.sleep(2000)
+      await this.udoUtils.createUdoForAzure4P(employee)
     } catch (error) {
       console.log(['error', error])
     }
