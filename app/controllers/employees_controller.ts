@@ -33,7 +33,19 @@ export default class EmployeesController {
    */
   async show({ view, params }: HttpContext) {
     const emp = await Employee.findOrFail(params.id)
-    const requests = await emp.related('requests').query().preload('employee').preload('tool')
+    const requestsAlta = await emp
+      .related('requests')
+      .query()
+      .where('request_type', 'ALTA')
+      .preload('employee')
+      .preload('tool')
+
+    const requestBaja = await emp
+      .related('requests')
+      .query()
+      .where('request_type', 'BAJA')
+      .preload('employee')
+      .preload('tool')
 
     const guserRequestStatus = await emp
       .related('requests')
@@ -47,7 +59,12 @@ export default class EmployeesController {
       canRequestAll = 'enabled'
     }
 
-    return view.render('pages/employees/employee_detail', { emp, requests, canRequestAll })
+    return view.render('pages/employees/employee_detail', {
+      emp,
+      requestsAlta,
+      requestBaja,
+      canRequestAll,
+    })
   }
 
   /**

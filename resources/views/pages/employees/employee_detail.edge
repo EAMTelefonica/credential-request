@@ -60,6 +60,44 @@
                             <a href="{{route('employees.request_tools.index', [emp.id])}}"
                                 class="btn btn-sm btn-primary {{canRequestAll}}"><i class="fas fa-plus">
                                 </i>Alta Herramientas con usuarios HI/IDX/Edomus</a>
+
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                data-target="#modal-delete-baja">
+                                <i class="fas fa-user-slash"></i> Solicitar Bajas
+                            </button>
+                            <div class="modal fade" id="modal-delete-baja" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content bg-warning">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Desea Solicitar la baja?</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="text-left">Seguro que desea dar de baja al empleado
+                                                {{emp.firstname}}
+                                                {{emp.lastname}}?, se creara multiple solicitudes de baja para este
+                                                empleado</p>
+                                        </div>
+                                        <form class="d-inline-block" method="POST"
+                                            action="{{route('procesar_baja', [emp.id])}}?_method=POST">
+                                            <!-- Delete form -->
+                                            <input type="hidden" name="id" value="{{emp.id}}">
+                                            {{ csrfField() }}
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Cancelar</button>
+                                                <button class="btn btn-danger btn-default" type="submit"><i
+                                                        class="fas fa-trash">
+                                                    </i>Solicitar Baja</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             {{-- <form class="d-inline-block" action="{{route('employee_request_tools')}}">
                                 <input type="hidden" name="requesttype" value="hiidxedomus">
                                 {{ csrfField() }}
@@ -79,83 +117,136 @@
         {{-- {{inspect(requests)}} --}}
         <div class="row">
             <div class="col-12">
+
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Herramientas:</h3>
-                        <div class="card-header text-muted border-bottom-0">
+                    <div class="card-header d-flex p-0">
+                        <h3 class="card-title p-3">Solicitudes</h3>
+                        <ul class="nav nav-pills mr-auto p-2">
+                            <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Altas</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Bajas</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1">
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
+
+                                            <tr>
+                                                <th>Request ID</th>
+                                                <th>Herramienta</th>
+                                                <th>Fecha</th>
+                                                <th>Status</th>
+                                                <th>Acceso</th>
+                                                <th>Comentario</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @each((request, index) in requestsAlta)
+                                            <tr>
+                                                <td>{{index+1}}</td>
+                                                <td>{{request.$preloaded.tool.tool_name}}</td>
+                                                <td>{{request.createdAt}}</td>
+                                                <td>
+                                                    @if(request.request_status==='SI')
+                                                    <span class="badge badge-success">Aprobado</span>
+                                                    @end
+                                                    {{-- <span class="badge badge-danger">denegado</span> --}}
+                                                    @if(request.request_status==='SOLICITADA')
+                                                    <span class="badge badge-warning">Solicitado</span>
+                                                    @end
+                                                    @if(request.request_status==='NO')
+                                                    <span class="badge badge-danger">Rechazado</span>
+                                                    @end
+
+
+                                                </td>
+                                                <th>{{request.acceso ? request.acceso: ''}}</th>
+                                                <td>{{request.comentario ? request.comentario: ''}}</td>
+                                                <td class="actions">
+                                                    @!component('components/request_modal_button', {id: request.id })
+                                                    @!component('components/request_modal_form', {employeeid: emp.id,
+                                                    id:request.id,
+                                                    tool_id: request.$preloaded.tool.id, status: request.request_status
+                                                    })
+                                                </td>
+                                            </tr>
+                                            @end
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tab_2">
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
+
+                                            <tr>
+                                                <th>Request ID</th>
+                                                <th>Herramienta</th>
+                                                <th>Fecha</th>
+                                                <th>Status</th>
+                                                <th>Acceso</th>
+                                                <th>Comentario</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @each((request, index) in requestBaja)
+                                            <tr>
+                                                <td>{{index+1}}</td>
+                                                <td>{{request.$preloaded.tool.tool_name}}</td>
+                                                <td>{{request.createdAt}}</td>
+                                                <td>
+                                                    @if(request.request_status==='SI')
+                                                    <span class="badge badge-success">Aprobado</span>
+                                                    @end
+                                                    {{-- <span class="badge badge-danger">denegado</span> --}}
+                                                    @if(request.request_status==='SOLICITADA')
+                                                    <span class="badge badge-warning">Solicitado</span>
+                                                    @end
+                                                    @if(request.request_status==='NO')
+                                                    <span class="badge badge-danger">Rechazado</span>
+                                                    @end
+
+
+                                                </td>
+                                                <th>{{request.acceso ? request.acceso: ''}}</th>
+                                                <td>{{request.comentario ? request.comentario: ''}}</td>
+                                                <td class="actions">
+                                                    @!component('components/request_modal_button', {id: request.id })
+                                                    @!component('components/request_modal_form', {employeeid: emp.id,
+                                                    id:request.id,
+                                                    tool_id: request.$preloaded.tool.id, status: request.request_status
+                                                    })
+                                                </td>
+                                            </tr>
+                                            @end
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
 
                         </div>
 
-                        {{-- Searching tools --}}
-                        {{-- <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right"
-                                    placeholder="Search">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
-
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-
-                                <tr>
-                                    <th>Request ID</th>
-                                    <th>Herramienta</th>
-                                    <th>Fecha</th>
-                                    <th>Status</th>
-                                    <th>Acceso</th>
-                                    <th>Comentario</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @each((request, index) in requests)
-                                <tr>
-                                    <td>{{index}}</td>
-                                    <td>{{request.$preloaded.tool.tool_name}}</td>
-                                    <td>{{request.createdAt}}</td>
-                                    <td>
-                                        @if(request.request_status==='SI')
-                                        <span class="badge badge-success">Aprobado</span>
-                                        @end
-                                        {{-- <span class="badge badge-danger">denegado</span> --}}
-                                        @if(request.request_status==='SOLICITADA')
-                                        <span class="badge badge-warning">Solicitado</span>
-                                        @end
-                                        @if(request.request_status==='NO')
-                                        <span class="badge badge-danger">Rechazado</span>
-                                        @end
-
-
-                                    </td>
-                                    <th>{{request.acceso ? request.acceso: ''}}</th>
-                                    <td>{{request.comentario ? request.comentario: ''}}</td>
-                                    <td class="actions">
-                                        @!component('components/request_modal_button', {id: request.id })
-                                        @!component('components/request_modal_form', {employeeid: emp.id, id:request.id,
-                                        tool_id: request.$preloaded.tool.id, status: request.request_status
-                                        })
-                                    </td>
-                                </tr>
-                                @end
-
-
-                            </tbody>
-                        </table>
-                    </div>
-
                 </div>
 
             </div>
-        </div>
 
+        </div>
     </section>
 
 </div>

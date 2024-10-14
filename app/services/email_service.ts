@@ -195,4 +195,59 @@ export default class EmailService {
         .htmlView('emailtemplate/send_udos.edge', { employee })
     })
   }
+  async sendAllEmailsBajas(employee: Employee) {
+    await this.sendEmailForBajaGuser(employee)
+    await this.sendBajaUdo(employee)
+    await this.sendvivoBajaform(employee)
+  }
+  // Baja de herramientas
+  async sendEmailForBajaGuser(employee: Employee) {
+    await mail.send((message) => {
+      message
+
+        .to('evely.adrianzamorales.ext@telefonica.com')
+        .cc('evely.adrianzamorales.ext@telefonica.com')
+        .bcc('evely.adrianzamorales.ext@telefonica.com')
+        .from('evely.adrianzamorales.ext@telefonica.com')
+        .subject(`Baja usuario en guser ${employee.firstname} ${employee.lastname}`)
+        .htmlView('emailtemplate/baja_guser.edge', { employee })
+    })
+    await this.toolRequest.createRequestForBajaGuser(employee)
+  }
+  async sendBajaUdo(employee: Employee) {
+    await mail.send((message) => {
+      message
+        .to('evely.adrianzamorales.ext@telefonica.com')
+        .cc('evely.adrianzamorales.ext@telefonica.com')
+        .bcc('evely.adrianzamorales.ext@telefonica.com')
+        .from('evely.adrianzamorales.ext@telefonica.com')
+        .subject(`Solicitud Deshabilitar Usuario UDO `)
+        .htmlView('emailtemplate/baja_udo.edge', { employee })
+    })
+    await this.toolRequest.createRequestForBajaUDO(employee)
+  }
+  async sendvivoBajaform(employee: Employee) {
+    await mail.send((message) => {
+      message
+        .to('evely.adrianzamorales.ext@telefonica.com')
+        .cc('evely.adrianzamorales.ext@telefonica.com')
+        .bcc('evely.adrianzamorales.ext@telefonica.com')
+        .from('evely.adrianzamorales.ext@telefonica.com')
+        .subject(`Baja azure vivo usuario BR`)
+        .htmlView('emailtemplate/baja_vivoform.edge', { employee })
+    })
+    await this.toolRequest.createRequestForBajaVivoForm(employee)
+  }
+  async sendUdosBajaEml(employee: Employee) {
+    console.log('at SendUDos')
+    await mail.send((message) => {
+      message
+        .to('evely.adrianzamorales.ext@telefonica.com')
+        .cc('evely.adrianzamorales.ext@telefonica.com')
+        .bcc('evely.adrianzamorales.ext@telefonica.com')
+        .from('evely.adrianzamorales.ext@telefonica.com')
+        .subject(`Aperturas de Udos para alta de usuario Front-Office`)
+        .htmlView('emailtemplate/send_udos.edge', { employee })
+    })
+  }
 }

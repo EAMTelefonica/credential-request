@@ -235,4 +235,32 @@ export default class ToolRequestService {
       udo_number: eid ? eid : 'empty',
     })
   }
+  // async createRequestForItsm(employee: Employee, baseurl: string, eid: string) {
+  //   const tool = await Tool.findByOrFail('tool_name', 'ITSM UDo')
+  //   await employee.related('requests').firstOrCreate({
+  //     toolId: tool.id,
+  //     request_type: 'ALTA',
+  //     request_status: 'SOLICITADA',
+  //     udo_host: baseurl,
+  //     udo_number: eid ? eid : 'empty',
+  //   })
+  // }
+  async createRequestForBajaVivoForm(employee: Employee) {
+    const tool = await Tool.findByOrFail('tool_name', 'vivo')
+    await employee
+      .related('requests')
+      .firstOrCreate({ toolId: tool.id, request_type: 'BAJA', request_status: 'SOLICITADA' })
+  }
+  async createRequestForBajaUDO(employee: Employee) {
+    const tool = await Tool.findByOrFail('tool_name', 'Udo')
+    await employee
+      .related('requests')
+      .firstOrCreate({ toolId: tool.id, request_type: 'BAJA', request_status: 'SOLICITADA' })
+  }
+  async createRequestForBajaGuser(employee: Employee) {
+    const toolGuser = await Tool.findByOrFail('tool_name', 'G-user')
+    await employee
+      .related('requests')
+      .firstOrCreate({ toolId: toolGuser.id, request_type: 'BAJA', request_status: 'SOLICITADA' })
+  }
 }

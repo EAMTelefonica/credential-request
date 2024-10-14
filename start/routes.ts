@@ -15,16 +15,14 @@ const AltasController = () => import('#controllers/altas_controller')
 const RequestToolsController = () => import('#controllers/request_tools_controller')
 const DataController = () => import('#controllers/data_controller')
 const HomeController = () => import('#controllers/home_controller')
+const BajasController = () => import('#controllers/bajas_controller')
 
 router.on('/').render('pages/login/login.edge')
-router.on('/template').render('all_template')
+
+router.on('/template').render('emailtemplate/firma')
 router.get('home', [HomeController, 'home']).as('home').use(middleware.auth())
 
 router.on('/edit').render('pages/employees/employee_detail_form.edge').as('detail_form.edit')
-// router
-//   .on('/request_tools')
-//   .render('pages/employees/employee_request_tools.edge')
-//   .as('employee.request.tools')
 
 //routes for login and logout
 router.on('/login').render('pages/login/login.edge').as('login')
@@ -53,8 +51,17 @@ router
   .only(['index', 'show', 'store', 'update', 'edit'])
 
 // rutas alta
-router.get('alta', [AltasController, 'alta']).as('alta')
-router.post('processAlta', [AltasController, 'procesarAlta']).as('procesar_alta')
+router.get('alta', [AltasController, 'alta']).as('alta').use(middleware.auth())
+router
+  .post('processAlta', [AltasController, 'procesarAlta'])
+  .as('procesar_alta')
+  .use(middleware.auth())
+
+// rutas Baja
+router
+  .post('processbaja/:id', [BajasController, 'procesarBaja'])
+  .as('procesar_baja')
+  .use(middleware.auth())
 
 // rutas data
 router.get('data', [DataController, 'AllData']).as('alldata').use(middleware.auth())
