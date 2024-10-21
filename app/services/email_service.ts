@@ -8,7 +8,6 @@ import ToolRequestService from './tool_request_service.js'
 export default class EmailService {
   constructor(protected toolRequest: ToolRequestService) {}
   async sentEmailForFrontoffice(employee: Employee) {
-    const info = {}
     await mail.send((message) => {
       message
         .to('evely.adrianzamorales.ext@telefonica.com')

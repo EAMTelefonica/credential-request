@@ -73,13 +73,15 @@ export default class RequestToolsController {
 
     // creacion de udo
     try {
+      const udoVIVO = await this.udoUtils.createUdoForHeramientasVideo(employee, pagerduty)
       // await this.udoUtils.createUdoForHeramientasVideo(employee, pagerduty)
       // await this.sleep(2000)
-      // await this.udoUtils.createUdoForHAC(employee)
+      const udoHAC = await this.udoUtils.createUdoForHAC(employee)
       // await this.sleep(2000)
-      // await this.udoUtils.createUdoForAzure4P(employee)
+      const udoAzure4p = await this.udoUtils.createUdoForAzure4P(employee)
       // await this.sleep(2000)
-      // await this.udoUtils.createUdoITSM(employee)
+      const udoITSM = await this.udoUtils.createUdoITSM(employee)
+      console.log(udoVIVO, udoHAC, udoAzure4p, udoITSM)
     } catch (error) {
       console.log(['error', error])
     }
@@ -92,22 +94,25 @@ export default class RequestToolsController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({}: HttpContext) {}
 
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {
-    const data = await this.udoUtils.test()
-    console.log(data)
-    console.log('esto es una prueba')
+  async edit({}: HttpContext) {
+    // const emp = await Employee.findByOrFail('id', params.employee_id)
+    // const data = await this.udoUtils.test()
+    // console.log(data)
+    // console.log('esto es una prueba')
+    // const data = await this.udoUtils.createUdoForHeramientasVideo(emp, 'pagerduty1')
+    // const data2 = await this.udoUtils.createUdoForHeramientasVideo(emp, 'pagerduty2')
   }
 
   /**
    * Handle form submission for the edit action
    */
   async update({ request, params, response }: HttpContext) {
-    const values = request.all()
+    // const values = request.all()
     const employee = await Employee.findByOrFail('id', params.employee_id)
     const toolRequest = await employee
       .related('requests')
@@ -131,5 +136,5 @@ export default class RequestToolsController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({}: HttpContext) {}
 }

@@ -186,6 +186,21 @@ export default class ToolRequestService {
       udo_number: eid ? eid : 'empty',
     })
   }
+  async createRequestUdoHerramientasVideo(employee: Employee, baseurl: string, eid: string) {
+    await this.createRequestForAtlas(employee, baseurl, eid)
+    await this.createRequestForZeus(employee, baseurl, eid)
+    await this.createRequestForZabbix(employee, baseurl, eid)
+    await this.createRequestFortool(employee, baseurl, eid)
+    await this.createRequestForYoubora(employee, baseurl, eid)
+    await this.createRequestForPagerDuty(employee, baseurl, eid)
+    await this.createRequestForDExternalPro(employee, baseurl, eid)
+    await this.createRequestForDOTTPro(employee, baseurl, eid)
+    await this.createRequestForDOpenGateway(employee, baseurl, eid)
+    await this.createRequestForDVideoPlataforma(employee, baseurl, eid)
+    await this.createRequestForMIB(employee, baseurl, eid)
+    await this.createRequestForSharePointGVPAzure(employee, baseurl, eid)
+    await this.createRequestForTechnicalDescription(employee, baseurl, eid)
+  }
   async createRequestForBastionES(employee: Employee, baseurl: string, eid: string) {
     const tool = await Tool.findByOrFail('tool_name', 'Bastion HAC ES')
     await employee.related('requests').firstOrCreate({
@@ -206,21 +221,6 @@ export default class ToolRequestService {
       udo_number: eid ? eid : 'empty',
     })
   }
-  async createRequestUdoHerramientasVideo(employee: Employee, baseurl: string, eid: string) {
-    await this.createRequestForAtlas(employee, baseurl, eid)
-    await this.createRequestForZeus(employee, baseurl, eid)
-    await this.createRequestForZabbix(employee, baseurl, eid)
-    await this.createRequestFortool(employee, baseurl, eid)
-    await this.createRequestForYoubora(employee, baseurl, eid)
-    await this.createRequestForPagerDuty(employee, baseurl, eid)
-    await this.createRequestForDExternalPro(employee, baseurl, eid)
-    await this.createRequestForDOTTPro(employee, baseurl, eid)
-    await this.createRequestForDOpenGateway(employee, baseurl, eid)
-    await this.createRequestForDVideoPlataforma(employee, baseurl, eid)
-    await this.createRequestForMIB(employee, baseurl, eid)
-    await this.createRequestForSharePointGVPAzure(employee, baseurl, eid)
-    await this.createRequestForTechnicalDescription(employee, baseurl, eid)
-  }
   async createRequestUdoAzureHacBastionES(employee: Employee, baseurl: string, eid: string) {
     await this.createRequestForBastionES(employee, baseurl, eid)
     await this.createRequestForAzureHacES(employee, baseurl, eid)
@@ -235,16 +235,7 @@ export default class ToolRequestService {
       udo_number: eid ? eid : 'empty',
     })
   }
-  // async createRequestForItsm(employee: Employee, baseurl: string, eid: string) {
-  //   const tool = await Tool.findByOrFail('tool_name', 'ITSM UDo')
-  //   await employee.related('requests').firstOrCreate({
-  //     toolId: tool.id,
-  //     request_type: 'ALTA',
-  //     request_status: 'SOLICITADA',
-  //     udo_host: baseurl,
-  //     udo_number: eid ? eid : 'empty',
-  //   })
-  // }
+  // baja herramientas
   async createRequestForBajaVivoForm(employee: Employee) {
     const tool = await Tool.findByOrFail('tool_name', 'vivo')
     await employee
@@ -262,5 +253,189 @@ export default class ToolRequestService {
     await employee
       .related('requests')
       .firstOrCreate({ toolId: toolGuser.id, request_type: 'BAJA', request_status: 'SOLICITADA' })
+  }
+
+  // baja herramientas con UDO order
+  async createRequestForAtlasBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Atlas')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForZeusBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Zeus')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForZabbixBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Zabbix')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForYouboraBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Youbora')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForPagerDutyBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'PagerDuty')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForDExternalProBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Dominio externalPro')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForDOTTProBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Dominio OTTPro')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForDOpenGatewayBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Dominio OpenGateway')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForDVideoPlataformaBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Dominio VideoPlataforma')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForMIBBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'MIB')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForSharePointGVPAzureBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'SharePoint GVP Azure')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForTechnicalDescriptionBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Technical Description')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+
+  async createRequestUdoHerramientasVideoBaja(employee: Employee, baseurl: string, eid: string) {
+    await this.createRequestForAtlasBaja(employee, baseurl, eid)
+    await this.createRequestForZeusBaja(employee, baseurl, eid)
+    await this.createRequestForZabbixBaja(employee, baseurl, eid)
+    // await this.createRequestFortoolBaja(employee, baseurl, eid)
+    await this.createRequestForYouboraBaja(employee, baseurl, eid)
+    await this.createRequestForPagerDutyBaja(employee, baseurl, eid)
+    await this.createRequestForDExternalProBaja(employee, baseurl, eid)
+    await this.createRequestForDOTTProBaja(employee, baseurl, eid)
+    await this.createRequestForDOpenGatewayBaja(employee, baseurl, eid)
+    await this.createRequestForDVideoPlataformaBaja(employee, baseurl, eid)
+    await this.createRequestForMIBBaja(employee, baseurl, eid)
+    await this.createRequestForSharePointGVPAzureBaja(employee, baseurl, eid)
+    await this.createRequestForTechnicalDescriptionBaja(employee, baseurl, eid)
+  }
+  async createRequestForBastionESBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Bastion HAC ES')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForAzureHacESBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Azure HAC ES')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+
+  async createRequestUdoAzureHacBastionESBaja(employee: Employee, baseurl: string, eid: string) {
+    await this.createRequestForBastionESBaja(employee, baseurl, eid)
+    await this.createRequestForAzureHacESBaja(employee, baseurl, eid)
+  }
+
+  async createRequestForItsmBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'ITSM UDo')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
+  }
+  async createRequestForAzure4PESBaja(employee: Employee, baseurl: string, eid: string) {
+    const tool = await Tool.findByOrFail('tool_name', 'Azure 4P ES')
+    await employee.related('requests').firstOrCreate({
+      toolId: tool.id,
+      request_type: 'BAJA',
+      request_status: 'SOLICITADA',
+      udo_host: baseurl,
+      udo_number: eid ? eid : 'empty',
+    })
   }
 }

@@ -4,7 +4,7 @@ import { BaseSeeder } from '@adonisjs/lucid/seeders'
 export default class extends BaseSeeder {
   async run() {
     //creando usuario evely
-    const user1 = await User.firstOrCreate({
+    await User.firstOrCreate({
       fullName: 'Evely',
       password: '123456',
       email: 'evely.adrianzamorales.ext@telefonica.com',
