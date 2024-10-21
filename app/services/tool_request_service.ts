@@ -419,7 +419,7 @@ export default class ToolRequestService {
   }
 
   async createRequestForItsmBaja(employee: Employee, baseurl: string, eid: string) {
-    const tool = await Tool.findByOrFail('tool_name', 'ITSM UDo')
+    const tool = await Tool.findByOrFail('tool_name', 'ITSM')
     await employee.related('requests').firstOrCreate({
       toolId: tool.id,
       request_type: 'BAJA',

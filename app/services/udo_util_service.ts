@@ -208,7 +208,7 @@ export default class UdoUtils {
     // await this.toolRequest.createRequestForItsm(employee, this.baseurl, r.eid)
     return r
   }
-  async createUdoForHeramientasVideoBaja(employee: Employee, pagerduty: string) {
+  async createUdoForHeramientasVideoBaja(employee: Employee) {
     const url = `https://${this.baseurl}/api/tt/contacts/?retrieve_param=eid`
     const body = {
       type: 'Order',
@@ -227,7 +227,7 @@ export default class UdoUtils {
         code: 'free_text_template',
         contexts: [
           [
-            `Se solicita Baja del accesos para excompañero de Front_Office España a las siguientes herramientas: \n- L2_Servicio: Baja Usuario Dominio BOB, Baja a los acceso a los Technnical Description de la CDN, Portal de Azure GVP (Transferir a lab1) \n- Lab1:MIB3 (Transferir a FO) \n- FO_España:AD (VPN de operaciones OTTPROD, EXTERNALPROD, VIDEOPLATFORM, OPG) - (Transferir a Tools) \n- Tools:Zeus/Calicux/Zabbix 5.0/ Atlas/ PagerDuty / Youbora (Transferir a FO)\n- IT: incluir el usuario PagerDuty en el grupo de escalado correspondiente a N1 ${pagerduty} (Transferir a video_L2_Servicio/N2_4P)\n- L2_Servicio: incluir el usuario PagerDuty en el grupo de escalado correspondiente a N1 ${pagerduty} (Transferir a FO)  \n\n Excompañero: ${employee.firstname} ${employee.lastname}\nEmail: ${employee.correo_front_office} \n\nSi fuera necesario un usuario de ejemplo usar los de Pedro Rafael Perez Soto`,
+            `Se solicita Baja del accesos para excompañero de Front_Office España a las siguientes herramientas: \n- L2_Servicio: Baja Usuario Dominio BOB, Baja a los acceso a los Technnical Description de la CDN, Portal de Azure GVP (Transferir a lab1) \n- Lab1:MIB3 (Transferir a FO) \n- FO_España:AD (VPN de operaciones OTTPROD, EXTERNALPROD, VIDEOPLATFORM, OPG) - (Transferir a Tools) \n- Tools:Zeus/Calicux/Zabbix 5.0/ Atlas/ PagerDuty / Youbora (Transferir a FO)\n- IT: incluir el usuario PagerDuty en el grupo de escalado correspondiente a N1  (Transferir a video_L2_Servicio/N2_4P)\n- L2_Servicio: incluir el usuario PagerDuty en el grupo de escalado correspondiente a N1  (Transferir a FO)  \n\n Excompañero: ${employee.firstname} ${employee.lastname}\nEmail: ${employee.correo_front_office} \n\nSi fuera necesario un usuario de ejemplo usar los de Pedro Rafael Perez Soto`,
           ],
         ],
       },

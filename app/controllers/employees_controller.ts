@@ -1,5 +1,6 @@
 import Employee from '#models/employee'
 import type { HttpContext } from '@adonisjs/core/http'
+import db from '@adonisjs/lucid/services/db'
 
 export default class EmployeesController {
   /**
@@ -47,23 +48,36 @@ export default class EmployeesController {
       .preload('employee')
       .preload('tool')
 
-    const guserRequestStatus = await emp
-      .related('requests')
-      .query()
-      .select('request_status as status')
-      .where('toolId', '2')
-      .first()
-    console.log(guserRequestStatus?.$extras.status)
-    let canRequestAll = 'disabled'
-    if (guserRequestStatus?.$extras.status === 'SI') {
-      canRequestAll = 'enabled'
+    const nuevaQuery =
+      await db.rawQuery(`select (select request_status from tool_requests where employee_id=${emp.id} and request_type='ALTA' and tool_id=2 ) as status_guser,
+(select count(id) from tool_requests where employee_id=${emp.id} and request_type='ALTA' )  as conteo_alta,
+(select count(id) from tool_requests where employee_id=${emp.id} and request_type='BAJA') as conteo_baja`)
+
+    console.log(nuevaQuery.rows)
+    let canRequestBaja = false
+    //puede solicitar baja si, el guser esta aprobado, no tiene bajas solicitadas, las altas solicitadas son mayor que 2 (guser, y frontoffice)
+    if (
+      nuevaQuery.rows[0].status_guser === 'SI' &&
+      nuevaQuery.rows[0].conteo_baja === '0' &&
+      Number.parseInt(nuevaQuery.rows[0].conteo_alta) > 2
+    ) {
+      canRequestBaja = true
     }
 
+    let canRequestAll = 'disabled'
+    if (
+      nuevaQuery.rows[0].status_guser === 'SI' &&
+      Number.parseInt(nuevaQuery.rows[0].conteo_alta) <= 2
+    ) {
+      canRequestAll = 'enabled'
+    }
+    console.log(canRequestAll, canRequestBaja)
     return view.render('pages/employees/employee_detail', {
       emp,
       requestsAlta,
       requestBaja,
       canRequestAll,
+      canRequestBaja,
     })
   }
 

@@ -74,7 +74,6 @@ export default class EmailService {
     await this.sendAltaITSM(employee, aut_itsmPath)
     await this.sendAltavivohac(employee)
     await this.sendAltavivoform(employee, fechaNacimiento, edocivil, sexo)
-    await this.sendUdos(employee)
   }
 
   async sendAltaIgri(employee: Employee) {
@@ -182,7 +181,13 @@ export default class EmailService {
     })
     await this.toolRequest.createRequestForVivoForm(employee)
   }
-  async sendUdos(employee: Employee) {
+  async sendUdos(
+    employee: Employee,
+    udoVideo: string,
+    udoHAC: string,
+    udoAzure4p: string,
+    udoITSM: string
+  ) {
     console.log('at SendUDos')
     await mail.send((message) => {
       message
@@ -191,7 +196,13 @@ export default class EmailService {
         .bcc('evely.adrianzamorales.ext@telefonica.com')
         .from('evely.adrianzamorales.ext@telefonica.com')
         .subject(`Aperturas de Udos para alta de usuario Front-Office`)
-        .htmlView('emailtemplate/send_udos.edge', { employee })
+        .htmlView('emailtemplate/send_udos.edge', {
+          employee,
+          udoVideo,
+          udoHAC,
+          udoAzure4p,
+          udoITSM,
+        })
     })
   }
   async sendAllEmailsBajas(employee: Employee) {
@@ -237,7 +248,13 @@ export default class EmailService {
     })
     await this.toolRequest.createRequestForBajaVivoForm(employee)
   }
-  async sendUdosBajaEml(employee: Employee) {
+  async sendUdosBajaEml(
+    employee: Employee,
+    udoVideoBaja: string,
+    udoAzure4pBaja: string,
+    udoHacBaja: string,
+    udoITSMBaja: string
+  ) {
     console.log('at SendUDos')
     await mail.send((message) => {
       message
@@ -245,8 +262,14 @@ export default class EmailService {
         .cc('evely.adrianzamorales.ext@telefonica.com')
         .bcc('evely.adrianzamorales.ext@telefonica.com')
         .from('evely.adrianzamorales.ext@telefonica.com')
-        .subject(`Aperturas de Udos para alta de usuario Front-Office`)
-        .htmlView('emailtemplate/send_udos.edge', { employee })
+        .subject(`Aperturas de Udos para bajas de usuario Front-Office`)
+        .htmlView('emailtemplate/send_udosbaja.edge', {
+          employee,
+          udoVideoBaja,
+          udoAzure4pBaja,
+          udoHacBaja,
+          udoITSMBaja,
+        })
     })
   }
 }

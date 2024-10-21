@@ -16,9 +16,7 @@ export default class RequestToolsController {
     protected employeeUtils: EmployeeUtils,
     protected udoUtils: UdoUtils
   ) {}
-  sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms))
-  }
+
   /**
    * Display a list of resource
    */
@@ -70,22 +68,28 @@ export default class RequestToolsController {
     )
     await disk.deleteAll(stringuid)
     //fin envio de correos request
-
-    // creacion de udo
     try {
-      const udoVIVO = await this.udoUtils.createUdoForHeramientasVideo(employee, pagerduty)
-      // await this.udoUtils.createUdoForHeramientasVideo(employee, pagerduty)
-      // await this.sleep(2000)
+      const udoVideo = await this.udoUtils.createUdoForHeramientasVideo(employee, pagerduty)
+
       const udoHAC = await this.udoUtils.createUdoForHAC(employee)
-      // await this.sleep(2000)
+
       const udoAzure4p = await this.udoUtils.createUdoForAzure4P(employee)
-      // await this.sleep(2000)
+
       const udoITSM = await this.udoUtils.createUdoITSM(employee)
-      console.log(udoVIVO, udoHAC, udoAzure4p, udoITSM)
+      console.log(udoVideo, udoHAC, udoAzure4p, udoITSM)
+
+      // envio de correo con udos
+      await this.emailService.sendUdos(
+        employee,
+        udoVideo.eid,
+        udoHAC.eid,
+        udoAzure4p.eid,
+        udoITSM.eid
+      )
+      // fin envio de correos con udos
     } catch (error) {
       console.log(['error', error])
     }
-
     // fin de creacion de udo
 
     return response.redirect().toRoute('employees.show', [employee.id])
@@ -99,13 +103,21 @@ export default class RequestToolsController {
   /**
    * Edit individual record
    */
-  async edit({}: HttpContext) {
-    // const emp = await Employee.findByOrFail('id', params.employee_id)
-    // const data = await this.udoUtils.test()
-    // console.log(data)
-    // console.log('esto es una prueba')
-    // const data = await this.udoUtils.createUdoForHeramientasVideo(emp, 'pagerduty1')
-    // const data2 = await this.udoUtils.createUdoForHeramientasVideo(emp, 'pagerduty2')
+  async edit({ params, view }: HttpContext) {
+    const employee = await Employee.findByOrFail('id', params.employee_id)
+    const udoVideoBaja = '1'
+    const udoAzure4pBaja = '2'
+    const udoHacBaja = '3'
+    const udoITSMBaja = '4'
+    console.log(employee)
+    console.log('esto es una prueba')
+    return view.render('emailtemplate/send_udosbaja', {
+      employee,
+      udoVideoBaja,
+      udoAzure4pBaja,
+      udoHacBaja,
+      udoITSMBaja,
+    })
   }
 
   /**

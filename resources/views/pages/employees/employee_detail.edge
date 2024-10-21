@@ -60,11 +60,12 @@
                             <a href="{{route('employees.request_tools.index', [emp.id])}}"
                                 class="btn btn-sm btn-primary {{canRequestAll}}"><i class="fas fa-plus">
                                 </i>Alta Herramientas con usuarios HI/IDX/Edomus</a>
-
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                            @if(canRequestBaja)
+                            <button type="button" class="btn btn-danger btn-sm " data-toggle="modal"
                                 data-target="#modal-delete-baja">
                                 <i class="fas fa-user-slash"></i> Solicitar Bajas
                             </button>
+                            @end
                             <div class="modal fade" id="modal-delete-baja" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content bg-warning">
