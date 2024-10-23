@@ -26,7 +26,7 @@ export default class SessionController {
 
   /*form to edit authenticated users*/
   async edit({ view }: HttpContext) {
-    return view.render('pages/users/user/user_edit')
+    return view.render('pages/users/user/edit_user')
   }
 
   async update({ request, view, response, session, auth }: HttpContext) {

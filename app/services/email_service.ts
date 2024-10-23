@@ -60,18 +60,16 @@ export default class EmailService {
     fechaNacimiento: string,
     edocivil: string,
     sexo: string,
-    aut_itsmPath: string
+    aut_itsmPath: string,
+    autItsmtooPath: string
   ) {
     console.log('at senemailall', [fechaNacimiento, edocivil, sexo])
-
     await this.sendAltaIgri(employee)
-
     await this.sendAltaConfluence(employee)
-
     await this.sendBuzonesFo(employee)
     await this.sendAltaUdo(employee)
     await this.sendAltaTeams(employee)
-    await this.sendAltaITSM(employee, aut_itsmPath)
+    await this.sendAltaITSM(employee, aut_itsmPath, autItsmtooPath)
     await this.sendAltavivohac(employee)
     await this.sendAltavivoform(employee, fechaNacimiento, edocivil, sexo)
   }
@@ -138,10 +136,11 @@ export default class EmailService {
     })
     await this.toolRequest.createRequestForTeams(employee)
   }
-  async sendAltaITSM(employee: Employee, aut_itsmPath: string) {
+  async sendAltaITSM(employee: Employee, aut_itsmPath: string, autItsmtooPath: string) {
     await mail.send((message) => {
       message
         .attach(app.makePath(aut_itsmPath))
+        .attach(app.makePath(autItsmtooPath))
         .to('evely.adrianzamorales.ext@telefonica.com')
         .cc('evely.adrianzamorales.ext@telefonica.com')
         .bcc('evely.adrianzamorales.ext@telefonica.com')

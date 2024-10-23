@@ -1,4 +1,5 @@
 // import type { HttpContext } from '@adonisjs/core/http'
+import { isAdmin } from '#abilities/main'
 import Employee from '#models/employee'
 import EmailService from '#services/email_service'
 import UdoUtils from '#services/udo_util_service'
@@ -14,7 +15,16 @@ export default class BajasController {
     protected udoUtils: UdoUtils
   ) {}
 
-  async procesarBaja({ request, response }: HttpContext) {
+  async procesarBaja({ bouncer, session, request, response }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+      return response.abort('usted no es administrador', 403)
+      // return response.redirect().back()
+    }
     const id = request.input('id')
     const employee = await Employee.query().where('id', id).firstOrFail()
     try {

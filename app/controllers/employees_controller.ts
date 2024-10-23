@@ -1,3 +1,4 @@
+import { isAdmin } from '#abilities/main'
 import Employee from '#models/employee'
 import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
@@ -6,7 +7,16 @@ export default class EmployeesController {
   /**
    * Display a list of resource
    */
-  async index({ view }: HttpContext) {
+  async index({ bouncer, session, view, response }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     const employees = await Employee.all()
     return view.render('pages/employees/employees_list', { employees })
   }
@@ -14,14 +24,32 @@ export default class EmployeesController {
   /**
    * Display form to create a new record
    */
-  async create({ view }: HttpContext) {
+  async create({ bouncer, session, response, view }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     return view.render('pages/employees/employee_create_form')
   }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ response, request }: HttpContext) {
+  async store({ bouncer, session, response, request }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     const values = request.except(['_csrf'])
     console.log(values)
     const employee = await Employee.firstOrCreate(values)
@@ -32,7 +60,16 @@ export default class EmployeesController {
   /**
    * Show individual record
    */
-  async show({ view, params }: HttpContext) {
+  async show({ bouncer, session, response, view, params }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     const emp = await Employee.findOrFail(params.id)
     const requestsAlta = await emp
       .related('requests')
@@ -84,7 +121,16 @@ export default class EmployeesController {
   /**
    * Edit individual record
    */
-  async edit({ params, view }: HttpContext) {
+  async edit({ bouncer, session, response, params, view }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     const employee = await Employee.find(params.id)
 
     return view.render('pages/employees/employee_edit_form', { employee })
@@ -93,7 +139,14 @@ export default class EmployeesController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ response, params, request }: HttpContext) {
+  async update({ bouncer, session, response, params, request }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+    }
     const employee = await Employee.findOrFail(params.id)
     const values = request.except(['_csrf'])
     employee.firstname = values.firstname
@@ -108,7 +161,16 @@ export default class EmployeesController {
   /**
    * Delete record
    */
-  async destroy({ params, response }: HttpContext) {
+  async destroy({ bouncer, session, params, response }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     const employee = await Employee.findOrFail(params.id)
     await employee.delete()
     response.redirect().toRoute('employees.index')

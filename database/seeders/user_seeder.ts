@@ -8,6 +8,7 @@ export default class extends BaseSeeder {
       fullName: 'Evely',
       password: '123456',
       email: 'evely.adrianzamorales.ext@telefonica.com',
+      role: 'Admin',
     })
   }
 }

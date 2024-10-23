@@ -1,3 +1,4 @@
+import { isAdmin } from '#abilities/main'
 import Employee from '#models/employee'
 import Tool from '#models/tool'
 import EmailService from '#services/email_service'
@@ -20,7 +21,16 @@ export default class RequestToolsController {
   /**
    * Display a list of resource
    */
-  async index({ params, view }: HttpContext) {
+  async index({ bouncer, session, response, params, view }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     const employee = await Employee.findByOrFail('id', params.employee_id)
 
     return view.render('pages/employees/employee_request_tools.edge', { employee })
@@ -34,7 +44,15 @@ export default class RequestToolsController {
   /**
    * Handle form submission for the create action
    */
-  async store({ response, request, params }: HttpContext) {
+  async store({ bouncer, session, response, request, params }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+      return response.redirect().back()
+    }
     const disk = drive.use()
     const stringuid = `/temp/${cuid()}`
     const tempPath = `storage/${stringuid}`
@@ -54,6 +72,15 @@ export default class RequestToolsController {
       name: cuidautItsm,
     })
 
+    const autItsmtoo = request.file('aut_itsmtoo', {
+      size: '2mb',
+    })
+    console.log(autItsmtoo)
+    const cuidautItsm2 = `${autItsmtoo?.clientName}`
+    await autItsmtoo?.move(app.makePath(tempPath), {
+      name: cuidautItsm2,
+    })
+
     employee.correo_front_office = email
     employee.matricula_hi = matriculaHi
     employee.save()
@@ -64,7 +91,8 @@ export default class RequestToolsController {
       fechaNacimiento,
       sexo,
       edocivil,
-      `${tempPath}/${cuidautItsm}`
+      `${tempPath}/${cuidautItsm}`,
+      `${tempPath}/${cuidautItsm2}`
     )
     await disk.deleteAll(stringuid)
     //fin envio de correos request
@@ -103,7 +131,16 @@ export default class RequestToolsController {
   /**
    * Edit individual record
    */
-  async edit({ params, view }: HttpContext) {
+  async edit({ bouncer, session, response, params, view }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     const employee = await Employee.findByOrFail('id', params.employee_id)
     const udoVideoBaja = '1'
     const udoAzure4pBaja = '2'
@@ -123,7 +160,16 @@ export default class RequestToolsController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ request, params, response }: HttpContext) {
+  async update({ bouncer, session, request, params, response }: HttpContext) {
+    if (await bouncer.denies(isAdmin)) {
+      session.flash('error-notification', {
+        type: 'error',
+        title: 'Usted no es administrador',
+        // information: messages,
+      })
+
+      return response.redirect().back()
+    }
     // const values = request.all()
     const employee = await Employee.findByOrFail('id', params.employee_id)
     const toolRequest = await employee

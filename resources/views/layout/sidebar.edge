@@ -14,7 +14,7 @@
                 <img src="../../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Nombre Empleado</a>
+                <a href="{{route('profile')}}" class="d-block">{{ auth.user.fullName }}</a>
             </div>
         </div>
 
@@ -52,34 +52,39 @@
                 </li>
 
                 </li>
+                @can('isAdmin')
                 <li class="nav-item">
                     <a href="{{route('alta')}}" class="nav-link">
                         <i class="nav-icon far fa-envelope nav-icon text-success"></i>
                         <p>Alta Usuario FO</p>
                     </a>
                 </li>
+                @end
+                @can('isAdmin')
                 <li class="nav-item">
                     <a href="{{route('employees.index')}}" class="nav-link">
                         <i class="nav-icon far fa-circle nav-icon text-info"></i>
                         <p>Empleado</p>
                     </a>
                 </li>
-
-                <li class="nav-item">
+                @end
+                {{-- <li class="nav-item">
                     <a href="pages/calendar.html" class="nav-link">
                         <i class="nav-icon fas fa-calendar-alt text-warning"></i>
                         <p>Calendario</p>
                         <span class="badge badge-info right"></span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
             </li>
+            @can('isAdmin')
             <li class="nav-item">
-                <a href="https://adminlte.io/docs/3.1/" class="nav-link">
-                    <i class="nav-icon fas fa-file"></i>
-                    <p>Plantillas</p>
+                <a href="{{route('users.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>usuarios</p>
                 </a>
             </li>
+            @end
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

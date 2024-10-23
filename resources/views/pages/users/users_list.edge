@@ -1,0 +1,259 @@
+@!component('layout/dashboard')
+@section('content')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-2">
+                    <h1 class="m-0">Users</h1>
+                </div>
+                <div class="col-sm-8">
+
+                </div>
+                <div class="col-sm-2">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Users</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <section class="content">
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-block btn-success btn-lg" data-toggle="modal"
+                data-target="#modal-default-create">New User</button>
+        </div>
+        {{-- new User Modal --}}
+        <div class="modal fade" id="modal-default-create" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">New User</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('users.store')}}" method="POST" id="userformcreate">
+                            {{ csrfField() }}
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="fullName">FullName</label>
+                                    <input type="text" id="fullName" class="form-control" name="fullName" value="">
+                                </div>
+                                <div class=" form-group">
+                                    <label for="email">Correo</label>
+                                    <input type="text" id="email" class="form-control" name="email" value="">
+                                </div>
+                                <div class=" form-group">
+                                    @!component('components/selectinput', { text:'Role', id:'role',
+                                    options:[{text:'Admin',value:'admin'},{text: 'User', value:'user'}]})
+                                </div>
+                                <div class=" form-group">
+                                    <label for="password">password</label>
+                                    <input type="password" id="password" class="form-control" name="password" value="">
+                                </div>
+
+                                <div class="col-sm-12">
+
+
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                <button type="submit" form="userformcreate" class="btn btn-primary">save</button>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        {{-- List of Users --}}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Users</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <div class="card-body p-0" style="display: block;">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%">
+                                user id
+                            </th>
+                            <th style="width: 20%">
+                                FullName
+                            </th>
+                            <th style="width: 20%">
+                                Equipo
+                            </th>
+                            <th style="width: 20%">
+                                role
+                            </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @each(user in users)
+                        <tr>
+                            <td>
+                                {{user.id}}
+                            </td>
+                            <td>
+                                <p>
+                                    {{user.fullName}}
+                                </p>
+
+                            </td>
+                            <td>
+                                {{user.email}}
+                            </td>
+                            <td>
+                                {{user.role}}
+                            </td>
+
+                            </td>
+                            <td class="Site-actions text-right">
+                                {{-- <a href="{{route('user.show', [user.id])}}">
+                                    <button class="btn btn-primary btn-sm" href="#">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        View
+                                    </button>
+                                </a> --}}
+
+
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                    data-target="#modal-default-{{user.id}}">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </button>
+
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                    data-target="#modal-delete-{{user.id}}">
+                                    <i class="fas fa-pencil-alt"></i> delete
+                                </button>
+                            </td>
+                        </tr>
+                        @end
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        {{-- Modals to delete users --}}
+
+        @each(user in users)
+        <div class="modal fade" id="modal-delete-{{user.id}}" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-warning">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> Delete {{user.fullName}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete user {{user.fullName}}</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <form class="d-inline-block" method="POST"
+                            action="{{route('users.destroy', [user.id])}}?_method=DELETE">
+
+                            <!-- Delete form -->
+                            {{ csrfField() }}
+                            <button class="btn btn-danger btn-default" type="submit"><i class="fas fa-trash">
+                                </i> Delete </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+</div>
+@end
+
+{{-- users Modals --}}
+@each(user in users)
+<div class="modal fade" id="modal-default-{{user.id}}" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{user.fullName}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('users.update', [user.id])}}?_method=PUT" method="POST" id="userform{{user.id}}">
+                    {{ csrfField() }}
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label for="fullName">FullName</label>
+                            <input type="text" id="fullName" class="form-control" name="fullName"
+                                value="{{user.fullName}}">
+                        </div>
+                        <div class=" form-group">
+                            <label for="email">Correo</label>
+                            <input type="text" id="email" class="form-control" name="email" value="{{user.email}}">
+                        </div>
+                        <div class=" form-group">
+                            @!component('components/selectinput', { text:'Role', id:'role',
+                            options:[{text:'Admin',value:'admin'},{text: 'User', value:'user'}]})
+                        </div>
+                        <div class=" form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" name="password" value="">
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                        <button type="submit" form="userform{{user.id}}" class="btn btn-primary">save</button>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@end
+
+</section>

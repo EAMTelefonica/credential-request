@@ -49,13 +49,6 @@
                             {{-- <a href="#" class="btn btn-sm bg-teal">
                                 <i class="fas fa-comments"></i>
                             </a> --}}
-                            {{-- <form class="d-inline-block" method="POST"
-                                action="{{route('employees.request.store', [emp.id])}}">
-                                <input type="hidden" name="requesttype" value="frontoffice">
-                                {{ csrfField() }}
-                                <button class="btn btn-sm btn-primary" type="submit"><i class="fas fa-plus">
-                                    </i> Alta Usuario front Office </button>
-                            </form> --}}
 
                             <a href="{{route('employees.request_tools.index', [emp.id])}}"
                                 class="btn btn-sm btn-primary {{canRequestAll}}"><i class="fas fa-plus">

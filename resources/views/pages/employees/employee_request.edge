@@ -83,6 +83,19 @@
 
 
                                 </div>
+                                <p class="mb-2">
+                                    <label for="fotocarnet">
+                                        <span class="lead" data-dz-name="">
+                                            <strong>
+                                                1.- Foto tipo carnet.
+                                            </strong>
+                                        </span>
+                                        <div class="input-group form-control">
+                                            <input type="file" id="fotocarnet" name="fotocarnet" accept="*" />
+                                        </div>
+
+                                    </label>
+                                </p>
                                 <div class="col-sm-3 mb-2">
                                     <div class="form-group ">
                                         <a
@@ -92,10 +105,184 @@
                                 </div>
 
 
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-md-12">
                                         <div class="card-header bg-primary">
                                             <h1 class="card-title">Solicitud Tarjeta TELEFONICA</h1>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    @!component('components/formtextinput', { text: 'Nombre',
+                                                    id:'firstname' })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    @!component('components/formtextinput', { text: 'Apellido',
+                                                    id:'lastname' })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="m-1 mt-4">Adjuntar documentacion requerida:</h4>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <p class="mb-2">
+                                                <label for="formulario">
+                                                    <span class="lead" data-dz-name="">
+                                                        <strong>1.-
+                                                            Formulario de
+                                                            tarjeta al correo.
+                                                        </strong>
+                                                    </span>
+                                                    <div class="input-group form-control">
+                                                        <input type="file" id="formulario" name="formulario"
+                                                            accept="*" />
+                                                    </div>
+                                                </label>
+                                            </p>
+
+                                            <p class="mb-2">
+                                                <label for="fotocarnet">
+                                                    <span class="lead" data-dz-name="">
+                                                        <strong>
+                                                            2.- Foto tipo carnet.
+                                                        </strong>
+                                                    </span>
+                                                    <div class="input-group form-control">
+                                                        <input type="file" id="fotocarnet" name="fotocarnet"
+                                                            accept="*" />
+                                                    </div>
+
+                                                </label>
+                                            </p>
+
+                                            <p class="mb-2">
+                                                <label for="fotodocu">
+                                                    <span class="lead" data-dz-name=""><strong>
+                                                            3.- Foto de DNI o NIE ambos lados.</strong>
+                                                    </span>
+                                                    <div class="input-group form-control ">
+                                                        <input type="file" id="fotodocu" name="fotodocu" accept="*" />
+                                                    </div>
+                                                </label>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Enviar Correos</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title ">Solicitud Tarjeta TELEFONICA</h3>
+                        </div>
+                        <form action="{{route('procesar_alta')}}" method="POST" enctype="multipart/form-data">
+                            <div class="card-body">
+                                {{--
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Nombre',
+                                            id:'firstname' })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Apellido',
+                                            id:'lastname' })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/selectinput', { text: 'Tipo Identificacion',
+                                            id:'identification_type', options:[{text:'DNI',value:'DNI'},
+                                            {text:'NIE',value:'NIE'},
+                                            {text:'pasaporte',value:'PASSPORT'}] })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        @!component('components/formtextinput', { text: 'Numero',
+                                        id:'identification_number' })
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            @!component('components/formtextinput', { text: 'Email TechM',
+                                            id:'EmailTechM' })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @!component('components/selectinput', { text: 'Role', id:'role', options:[
+                                            {text:'operador',value:'operador'},
+                                            {text:'cordinador',value:'cordinador'}]
+                                            })
+                                            {{ csrfField() }}
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <p class="mb-2">
+                                    <label for="fotocarnet">
+                                        <span class="lead" data-dz-name="">
+                                            <strong>
+                                                1.- Foto tipo carnet.
+                                            </strong>
+                                        </span>
+                                        <div class="input-group form-control">
+                                            <input type="file" id="fotocarnet" name="fotocarnet" accept="*" />
+                                        </div>
+
+                                    </label>
+                                </p>
+                                <div class="col-sm-3 mb-2">
+                                    <div class="form-group ">
+                                        <a
+                                            href="https://sts.tid.es/adfs/ls/?SAMLRequest=lZLNTsMwEIRfxdp74sQUUqymVQEhkIqoSODAbRO7ravEDl6n4vEJ%2FRFwqcTR8oxn9ltPZp9tw3bak3E2hzROgGlbO2XsOofX8j4aw2w6IWwb0cl5Hzb2RX%2F0mgIbjJbk4SaH3lvpkAxJi60mGWpZzJ8WUsSJ7LwLrnYNsDmR9mGIunWW%2Blb7QvudqfXryyKHTQgdSc47H1Wd8wGbKI1aVPHGxMbqwNf94ObfibwonoHdDTWMxbCvfnJToDgYFWviqFbEG%2BLA7p2v9b59DitsSAN7vMsBR5hVV9v0Qo3GmdpuUqGqLBUZXtWX1VgNIloikdnpHxtRrx8tBbQhB5EIESVZJK7LVMiLTI5GcSKu34EtjzPfGHtgeQ5QdRCRfCjLZbR8Lkpgb6edDAI4bkDu0%2F1v9OcfxhNvmP6HbqsDKgw44b9jp8fj338w%2FQI%3D&SigAlg=http%3A%2F%2Fwww.w3.org%2F2001%2F04%2Fxmldsig-more%23rsa-sha256&Signature=Du9JNIV6HIhq1zisfawMpeMi88PPMfK%2B3qmViviKTM1NOnCYjcJ0EFKL2cU%2FCCPdAS4KG4qZK6iXYcNoJWlVxPD4zDoPbnISbQPdTxVucW%2FI8f7sfPYJi8i8KMnSStImrEHACxi0zgw79XPYD23mYL5NIeor%2BMTOT5kOcUY02PeyewmqGYPwclP5HmkhzQiQcZHyh1p%2BPcqqZXBRpQD%2F%2FWpiYmO%2BmpYfvX3YpwECUD5zEtUtuJ2ofmAB1UMpkCotbNOkLHQET0GVki905FgplSVZWCGP8Beyb0JpK%2FXtuQTRBr8gKBZi7h4Bm3PVZybwyhhMVG9KwFjWR0ga0pOX2g%3D%3D">
+                                            ACCESO AL PORTAR DE Guser</a>
+                                    </div>
+                                </div> --}}
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{-- <div class="card-header bg-primary">
+                                            <h1 class="card-title">Solicitud Tarjeta TELEFONICA</h1>
+                                        </div> --}}
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    @!component('components/formtextinput', { text: 'Nombre',
+                                                    id:'firstname' })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    @!component('components/formtextinput', { text: 'Apellido',
+                                                    id:'lastname' })
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div>
